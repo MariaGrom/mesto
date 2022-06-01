@@ -1,0 +1,13 @@
+.elements__item{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 282px;
+    min-height: 361px;
+    margin: 0;
+    padding: 0;
+    background: #fff;
+    overflow: hidden;
+    border-radius: 10px;
+    border: 1px red solid;
+}

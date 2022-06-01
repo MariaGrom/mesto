@@ -1,0 +1,24 @@
+.header {
+    display: flex;
+    max-width: calc(100% - 2 * 200px);
+    height: 74px;
+    margin: 0 auto 0;
+    padding: 45px 0 0;
+    align-items: start;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: #545454;
+}
+
+@media screen and (max-width: 1024px) {
+    .header {
+        max-width: calc(100% - 2 * 100px);
+        padding: 28px 0 0;
+    }
+}
+
+@media screen and (max-width: 425px) {
+    .header {
+        max-width: calc(100% - 2 * 27px);
+    }
+}
