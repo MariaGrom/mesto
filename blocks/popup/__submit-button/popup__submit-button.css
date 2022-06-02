@@ -1,0 +1,10 @@
+.popup__submit-button{
+    background-color: #000;
+    height: 50px;
+    width: 100%;
+    border-radius: 2px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    color: #fff;
+}

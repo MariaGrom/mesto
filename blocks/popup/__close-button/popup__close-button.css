@@ -7,8 +7,18 @@
     background-repeat: no-repeat;
     background-position: center;
     margin: 0;
+    border: 0;
+    padding: 0;
     position: absolute;
     top: -40px;
     right: -40px;
-    box-shadow: none;
+}
+
+@media screen and (max-width: 608px) {
+    .popup__close-button {
+        width: 20px;
+        height: 20px;
+        top: -36px;
+        right: 0px;
+    }
 }
