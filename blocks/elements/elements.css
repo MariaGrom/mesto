@@ -1,24 +1,24 @@
-.elements{
+.elements {
     width: calc(100% - 2 * 200px);
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    grid-template-rows: repeat(auto-fit, minmax(361px, 1fr));
+    grid-template-columns: repeat(auto-fit, 280px);
+    grid-template-rows: repeat(auto-fit, 361px);
     gap: 17px 20px;
     margin: 0 auto 0;
     padding: 46.25px 0 0px;
     justify-items: center;
-    border: 1px red solid;
+    justify-content: center;
+    align-items: center;
 }
 
 @media screen and (max-width: 1024px) {
     .elements {
-       width: calc(100% - 2 * 100px);
+        width: calc(100% - 2 * 100px);
     }
 }
 
-@media screen and (max-width: 425px) {
+@media screen and (max-width: 496px) {
     .elements {
         width: calc(100% - 2 * 19px);
-
     }
 }

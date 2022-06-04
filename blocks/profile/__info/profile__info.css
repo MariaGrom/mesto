@@ -3,8 +3,7 @@
     margin: 0;
     padding: 0;
     align-items: center;
-    border: 1px red solid;
-    max-width: 500px;
+    width: 100%;
 }
 
 @media screen and (max-width: 1104px) {

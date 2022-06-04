@@ -1,3 +1,4 @@
+//Находим кнопки 
 const buttonOpen = document.querySelector('.profile__edit-button');
 const popup = document.querySelector('.popup');
 const popupCloseButton = document.querySelector('.popup__close-button');
@@ -17,18 +18,18 @@ buttonOpen.addEventListener('click', function () {
     jobInput.value = newJob.textContent;
 })
 
+//Попап закрыт
 popupCloseButton.addEventListener('click', function () {
     popup.classList.add('popup_hidden');
 })
 
-// Обработчик «отправки» формы, хотя пока
-// она никуда отправляться не будет
+// Обработчик «отправки» формы, хотя пока она никуда отправляться не будет
 function formSubmitHandler(evt) {
     evt.preventDefault();// Эта строчка отменяет стандартную отправку формы.
 
     newName.textContent = nameInput.value; //новые элементы полей
     newJob.textContent = jobInput.value;
-    popup.classList.add('popup_hidden');
+    popup.classList.add('popup_hidden'); //закрытие попапа по "Сохранению"
 }
 
 // Прикрепляем обработчик к форме:
