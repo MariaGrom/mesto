@@ -7,7 +7,7 @@
     align-items: start;
     border-bottom-width: 1px;
     border-bottom-style: solid;
-    border-bottom-color: #545454;
+    border-bottom-color: rgba(84, 84, 84, 0.7);
 }
 
 @media screen and (max-width: 1024px) {
@@ -17,8 +17,9 @@
     }
 }
 
-@media screen and (max-width: 425px) {
+@media screen and (max-width: 779px) {
     .header {
         max-width: calc(100% - 2 * 27px);
+        height: 56px;
     }
 }

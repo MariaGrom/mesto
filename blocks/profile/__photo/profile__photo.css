@@ -1,6 +1,7 @@
 .profile__photo {
-    width: 100%;
-    max-width: 120px;
-    margin: auto;
+    width: 120px;
+    margin: 0;
     border-radius: 50%;
+    object-fit: contain;
+    padding: 3.75px 26.25px 3.75px 22.5px;
 }
