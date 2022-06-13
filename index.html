@@ -37,6 +37,7 @@
                         <h2 class="elements__title">Карачаево</h2>
                         <button class="elements__like elements__like_active"></button>
                     </div>
+                    <button class="elements__delete"></button>
                 </li>
                 <li class="elements__item">
                     <img class="elements__photo" src="images/elbrus.png" alt="Фото публикации">
@@ -44,6 +45,7 @@
                         <h2 class="elements__title">Гора Эльбрус</h2>
                         <button class="elements__like elements__like_active"></button>
                     </div>
+                    <button class="elements__delete"></button>
                 </li>
                 <li class="elements__item">
                     <img class="elements__photo" src="images/dombai.png" alt="Фото публикации">
@@ -51,6 +53,7 @@
                         <h2 class="elements__title">Домбай</h2>
                         <button class="elements__like elements__like_active"></button>
                     </div>
+                    <button class="elements__delete"></button>
                 </li>
                 <li class="elements__item">
                     <img class="elements__photo" src="images/elbrus.png" alt="Фото публикации">
@@ -58,6 +61,7 @@
                         <h2 class="elements__title">Гора Эльбрус</h2>
                         <button class="elements__like elements__like_active"></button>
                     </div>
+                    <button class="elements__delete"></button>
                 </li>
                 <li class="elements__item">
                     <img class="elements__photo" src="images/dombai.png" alt="Фото публикации">
@@ -65,6 +69,7 @@
                         <h2 class="elements__title">Домбай</h2>
                         <button class="elements__like elements__like_active"></button>
                     </div>
+                    <button class="elements__delete"></button>
                 </li>
                 <li class="elements__item">
                     <img class="elements__photo" src="images/karachaevo.jpg" alt="Фото публикации">
@@ -72,6 +77,7 @@
                         <h2 class="elements__title">Карачаево-Черкесская</h2>
                         <button class="elements__like elements__like_active"></button>
                     </div>
+                    <button class="elements__delete"></button>
                 </li>
             </ul>
         </section>
@@ -84,6 +90,17 @@
                 <input type="text" name="item__description" placeholder="Исследователь океана"
                     class="popup__text popup__text_type_description">
                 <button type="submit" class="popup__submit-button">Сохранить</button>
+            </form>
+        </div>
+        <div class="popup-place popup-place_hidden">
+            <form class="popup__content">
+                <button type="button" class="popup-place__close-button"></button>
+                <h2 class="popup__title">Новое место</h2>
+                <input type="text" name="place__name" placeholder="Название"
+                    class="popup__text popup-place__text_type_name">
+                <input type="text" name="place__link" placeholder="Ссылка на картинку"
+                    class="popup__text popup-place__text_type_link">
+                <button type="submit" class="popup__submit-button">Создать</button>
             </form>
         </div>
     </main>

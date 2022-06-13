@@ -1,3 +1,5 @@
+
+// Попал для изменения профиля пользователя
 //Находим кнопки 
 const buttonOpen = document.querySelector('.profile__edit-button');
 const popup = document.querySelector('.popup');
@@ -40,3 +42,28 @@ function formSubmitHandler(evt) {
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»
 formElement.addEventListener('submit', formSubmitHandler); 
+
+
+
+
+// Добавление попапа для Нового места
+
+const buttonAddOpen = document.querySelector('.profile__add-button');
+const popupPlace = document.querySelector('.popup-place');
+const popupPlaceCloseButton = document.querySelector('.popup-place__close-button');
+
+//объявим функцию открытия попапа места
+function popupPlaceOpen() {
+    popupPlace.classList.remove('popup-place_hidden');
+}
+
+//Слушатель действий. Попап места открыт
+buttonAddOpen.addEventListener('click', popupPlaceOpen);
+
+// объявим функцю закрытия попапа места
+function popupPlaceClose() {
+    popupPlace.classList.add('popup-place_hidden');
+}
+
+//Слушатель действий. Попап закрыт
+popupPlaceCloseButton.addEventListener('click', popupPlaceClose);
