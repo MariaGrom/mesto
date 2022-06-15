@@ -79,12 +79,19 @@ function addCard(nameValue, linkValue) {
     newCard.querySelector(".elements__photo").src = linkValue; //ссылка на новое место
     
 // добавить удаление карточки
+
+newCard.querySelector(".elements__delete").addEventListener('click', () => {
+    deleteCard(newCard);
+})
 // добавить клик по картинке 
 // добавить лайк по карточке
 
     list.prepend(newCard);
 }
 
+function deleteCard(item){
+    item.remove();
+}
 // обработчик событий по добавлению новой карточки 
 function createCard(evt) {
     evt.preventDefault();// Эта строчка отменяет стандартную отправку формы.
