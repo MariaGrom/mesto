@@ -1,15 +1,14 @@
 
 // Попал для изменения профиля пользователя
-//Находим кнопки 
-const buttonOpen = document.querySelector('.profile__edit-button');
+
+const buttonOpen = document.querySelector('.profile__edit-button');//Находим кнопки 
 const popup = document.querySelector('.popup');
 const popupCloseButton = document.querySelector('.popup__close-button');
-// Находим форму в DOM
-let formElement = document.querySelector('.popup__content');
-// Находим поля формы в DOM
-let nameInput = formElement.querySelector('.popup__text_type_name');
-let jobInput = formElement.querySelector('.popup__text_type_description');
-// Находим имя и работу в профили, которые нужно будет изменить 
+
+let formElement = document.querySelector('.popup__content');// Находим форму в DOM
+
+let nameInput = formElement.querySelector('.popup__text_type_name');// Находим поля формы в DOM
+let jobInput = formElement.querySelector('.popup__text_type_description');// Находим имя и работу в профили, которые нужно будет изменить 
 let newName = document.querySelector('.profile__title');
 let newJob = document.querySelector('.profile__subtitle');
 
@@ -39,8 +38,7 @@ function formSubmitHandler(evt) {
     popupClose();  //закрытие попапа по "Сохранению"
 }
 
-// Прикрепляем обработчик к форме:
-// он будет следить за событием “submit” - «отправка»
+// Прикрепляем обработчик к форме:он будет следить за событием “submit” - «отправка»
 formElement.addEventListener('submit', formSubmitHandler); 
 
 // Добавление попапа для Нового места
@@ -67,10 +65,10 @@ popupPlaceCloseButton.addEventListener('click', popupPlaceClose);
 
 // Добавление карточек
 
-//const itemTemplate = document.querySelector(".item__template").content;
+const itemTemplate = document.querySelector(".item__template").content;
 const list = document.querySelector(".elements__items");
 const form = document.querySelector(".popup-place__content");
-const formButton = document.querySelector(".popup__submit-button");
+const formButton = document.querySelector(".popup__submit-button"); // нужна ли она мне?
 const formInputName = document.querySelector(".popup-place__text_type_name");
 const formInputLink = document.querySelector(".popup-place__text_type_link");
 const newNameCard =  document.querySelector(".elements__title");
@@ -78,10 +76,15 @@ const newLinkCard = document.querySelector(".elements__photo");
 
 //функция добавления карточки
 function addCard(nameValue, linkValue) {
-    const itemTemplate = document.querySelector(".item__template").content; //подхватываем template
     const newCard = itemTemplate.querySelector(".elements__items").cloneNode(true); //клонируем элемент списка из документ-фрагмента
     newCard.querySelector(".elements__title").textContent = nameValue; //название нового места
-    newCard.querySelector(".elements__photo").src = linkValue //ссылка на новое место
+    newCard.querySelector(".elements__photo").src = linkValue; //ссылка на новое место
+    
+// добавить удаление карточки
+// добавить клик по картинке 
+// добавить лайк по карточке
+
+    list.prepend(newCard);
 }
 
 // обработчик событий по добавлению новой карточки 
@@ -90,23 +93,16 @@ function addButton(evt) {
     evt.preventDefault();// Эта строчка отменяет стандартную отправку формы.
     newNameCard.textContent = formInputName.value; //новое имя поля "Названия" места
     newLinkCard.src = formInputLink.value; //новое имя поля "Ссылка" места
+    
+    addCard(formInputName.value, formInputLink.value);
+
+
+    formInputName.value = '';
+    formInputLink.value = '';
+    
     popupPlaceClose();  //закрытие попапа по "Сохранению"
 }
 
-formElement.addEventListener('submit', formSubmitHandler); 
+form.addEventListener('submit', addButton); 
 
-/*function renderItem (text) {
-    const newElement = itemTemplate.querySelector(".elements__item").cloneNode(true);
-    newElement.querySelector('.elements__title').innerText = text;
-
-    newElement.querySelector('.elements__delete').addEventListener ('click', () => {
-        deleteItem(newElement);
-    })
-
-    list.insertAdjacentElement('afterbegin', newElement);
-}
-
-
-form.addEventListener('submit', createItem)
-
-items.forEach(renderItem);*/
+//initialCards.forEach(addCard);
