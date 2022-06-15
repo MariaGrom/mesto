@@ -71,12 +71,10 @@ const form = document.querySelector(".popup-place__content");
 const formButton = document.querySelector(".popup__submit-button"); // нужна ли она мне?
 const formInputName = document.querySelector(".popup-place__text_type_name");
 const formInputLink = document.querySelector(".popup-place__text_type_link");
-const newNameCard =  document.querySelector(".elements__title");
-const newLinkCard = document.querySelector(".elements__photo");
 
 //функция добавления карточки
 function addCard(nameValue, linkValue) {
-    const newCard = itemTemplate.querySelector(".elements__items").cloneNode(true); //клонируем элемент списка из документ-фрагмента
+    const newCard = itemTemplate.querySelector(".elements__item").cloneNode(true); //клонируем элемент списка из документ-фрагмента
     newCard.querySelector(".elements__title").textContent = nameValue; //название нового места
     newCard.querySelector(".elements__photo").src = linkValue; //ссылка на новое место
     
@@ -88,14 +86,10 @@ function addCard(nameValue, linkValue) {
 }
 
 // обработчик событий по добавлению новой карточки 
-
-function addButton(evt) {
+function createCard(evt) {
     evt.preventDefault();// Эта строчка отменяет стандартную отправку формы.
-    newNameCard.textContent = formInputName.value; //новое имя поля "Названия" места
-    newLinkCard.src = formInputLink.value; //новое имя поля "Ссылка" места
-    
-    addCard(formInputName.value, formInputLink.value);
 
+    addCard(formInputName.value, formInputLink.value); //присваиваем новой карточке значения из полей формы
 
     formInputName.value = '';
     formInputLink.value = '';
@@ -103,6 +97,6 @@ function addButton(evt) {
     popupPlaceClose();  //закрытие попапа по "Сохранению"
 }
 
-form.addEventListener('submit', addButton); 
+form.addEventListener('submit', createCard); 
 
 //initialCards.forEach(addCard);
