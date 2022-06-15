@@ -43,11 +43,7 @@ function formSubmitHandler(evt) {
 // он будет следить за событием “submit” - «отправка»
 formElement.addEventListener('submit', formSubmitHandler); 
 
-
-
-
 // Добавление попапа для Нового места
-
 const buttonAddOpen = document.querySelector('.profile__add-button');
 const popupPlace = document.querySelector('.popup-place');
 const popupPlaceCloseButton = document.querySelector('.popup-place__close-button');
@@ -67,3 +63,50 @@ function popupPlaceClose() {
 
 //Слушатель действий. Попап закрыт
 popupPlaceCloseButton.addEventListener('click', popupPlaceClose);
+
+
+// Добавление карточек
+
+//const itemTemplate = document.querySelector(".item__template").content;
+const list = document.querySelector(".elements__items");
+const form = document.querySelector(".popup-place__content");
+const formButton = document.querySelector(".popup__submit-button");
+const formInputName = document.querySelector(".popup-place__text_type_name");
+const formInputLink = document.querySelector(".popup-place__text_type_link");
+const newNameCard =  document.querySelector(".elements__title");
+const newLinkCard = document.querySelector(".elements__photo");
+
+//функция добавления карточки
+function addCard(nameValue, linkValue) {
+    const itemTemplate = document.querySelector(".item__template").content; //подхватываем template
+    const newCard = itemTemplate.querySelector(".elements__items").cloneNode(true); //клонируем элемент списка из документ-фрагмента
+    newCard.querySelector(".elements__title").textContent = nameValue; //название нового места
+    newCard.querySelector(".elements__photo").src = linkValue //ссылка на новое место
+}
+
+// обработчик событий по добавлению новой карточки 
+
+function addButton(evt) {
+    evt.preventDefault();// Эта строчка отменяет стандартную отправку формы.
+    newNameCard.textContent = formInputName.value; //новое имя поля "Названия" места
+    newLinkCard.src = formInputLink.value; //новое имя поля "Ссылка" места
+    popupPlaceClose();  //закрытие попапа по "Сохранению"
+}
+
+formElement.addEventListener('submit', formSubmitHandler); 
+
+/*function renderItem (text) {
+    const newElement = itemTemplate.querySelector(".elements__item").cloneNode(true);
+    newElement.querySelector('.elements__title').innerText = text;
+
+    newElement.querySelector('.elements__delete').addEventListener ('click', () => {
+        deleteItem(newElement);
+    })
+
+    list.insertAdjacentElement('afterbegin', newElement);
+}
+
+
+form.addEventListener('submit', createItem)
+
+items.forEach(renderItem);*/
