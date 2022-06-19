@@ -1,6 +1,5 @@
 
 // Попал для изменения профиля пользователя
-
 const buttonOpen = document.querySelector('.profile__edit-button');//Находим кнопки 
 const popup = document.querySelector('.popup');
 const popupCloseButton = document.querySelector('.popup__close-button');
@@ -37,17 +36,16 @@ function formSubmitHandler(evt) {
 }
 
 // Прикрепляем обработчик к форме:он будет следить за событием “submit” - «отправка»
-formElement.addEventListener('submit', formSubmitHandler); 
-
-
-
-
-
+formElement.addEventListener('submit', formSubmitHandler);
 
 // Добавление попапа для Нового места
 const buttonAddOpen = document.querySelector('.profile__add-button');
 const popupPlace = document.querySelector('.popup_place');
 const popupPlaceCloseButton = document.querySelector('.popup-place__close-button');
+// Добавление попапа для Демонстрации фото
+const buttonOpenPhoto = document.querySelector('.elements__photo');
+const popupPhoto = document.querySelector('.popup_photo');
+const buttonClosePhoto = popupPhoto.querySelector('.popup__close-button');
 
 //объявим функцию открытия попапа места
 function popupPlaceOpen() {
@@ -63,16 +61,24 @@ function popupPlaceClose() {
     popupPlace.classList.add('popup_hidden');
 }
 
-//Слушатель действий. Попап закрыт
+//Слушатель действий. Попап места закрыт
 popupPlaceCloseButton.addEventListener('click', popupPlaceClose);
 
 
+//объявим функцию открытия попапа с фото
+function popupPhotoOpen() {
+    popupPhoto.classList.remove('popup_hidden');
+}
 
+//объявим функцию закрытия попапа с фото
+function popupPhotoClose() {
+    popupPhoto.classList.add('popup_hidden');
+}
 
-
+//Слушатель действий. Попап фото закрыт
+buttonClosePhoto.addEventListener('click', popupPhotoClose);
 
 // Добавление карточек
-
 const itemTemplate = document.querySelector(".item__template").content;
 const list = document.querySelector(".elements__items");
 const form = document.querySelector(".popup__content_place");
@@ -80,31 +86,41 @@ const formButton = document.querySelector(".popup__submit-button"); // нужн�
 const formInputName = document.querySelector(".popup-place__text_type_name");
 const formInputLink = document.querySelector(".popup-place__text_type_link");
 const buttonLike = document.querySelector(".elements__like");
+const popupPhotoTitle = document.querySelector('.popup__caption');
+const popupPhotoImg = document.querySelector('.popup__photo');
 
 //функция добавления карточки
 function addCard(name, link) {
     const newCard = itemTemplate.querySelector(".elements__item").cloneNode(true); //клонируем элемент списка из документ-фрагмента
     newCard.querySelector(".elements__title").textContent = name; //название нового места
     newCard.querySelector(".elements__photo").src = link; //ссылка на новое место
-    
-// событие по клику на удаление - вызов функции удаления карточки
-newCard.querySelector(".elements__delete").addEventListener('click', () => {
-    deleteCard(newCard);
-})
-// добавить клик по картинке 
+    newCard.querySelector('.elements__photo').alt = name; //alt нового места
+
+    // событие по клику на удаление - вызов функции удаления карточки
+    newCard.querySelector(".elements__delete").addEventListener('click', () => {
+        deleteCard(newCard);
+    });
+    // добавить клик по картинке 
+
+    newCard.querySelector(".elements__photo").addEventListener('click', () => {
+        popupPhotoImg.src = link;
+        popupPhotoImg.alt = name;
+        popupPhotoTitle.textContent = name;
 
 
+        popupPhotoOpen();
+    });
 
-// функция лайка по карточке
-newCard.querySelector(".elements__like").addEventListener('click', function(evt) {
-    evt.target.classList.toggle("elements__like_active");
-})
+    // функция лайка по карточке
+    newCard.querySelector(".elements__like").addEventListener('click', function (evt) {
+        evt.target.classList.toggle("elements__like_active");
+    })
 
     list.prepend(newCard);
 }
 
 //функция удаления карточки
-function deleteCard(item){
+function deleteCard(item) {
     item.remove();
 }
 
@@ -116,20 +132,14 @@ function createCard(evt) {
 
     formInputName.value = '';
     formInputLink.value = '';
-    
+
     popupPlaceClose();  //закрытие попапа по "Сохранению"
 }
 
-form.addEventListener('submit', createCard); 
+form.addEventListener('submit', createCard);
 
 
 //Перебор массива под существующие функции добавления/удаление/лайки карточки 
-initialCards.forEach(function(item){
+initialCards.forEach(function (item) {
     addCard(item.name, item.link);
 });
-
-
-// Реализация открытия карточки крупным планом 
-
-//1. Открытие попапа
-
