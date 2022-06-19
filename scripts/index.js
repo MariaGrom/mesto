@@ -71,6 +71,8 @@ const form = document.querySelector(".popup-place__content");
 const formButton = document.querySelector(".popup__submit-button"); // нужна ли она мне?
 const formInputName = document.querySelector(".popup-place__text_type_name");
 const formInputLink = document.querySelector(".popup-place__text_type_link");
+const buttonLike = document.querySelector(".elements__like");
+
 
 //функция добавления карточки
 function addCard(name, link) {
@@ -78,20 +80,30 @@ function addCard(name, link) {
     newCard.querySelector(".elements__title").textContent = name; //название нового места
     newCard.querySelector(".elements__photo").src = link; //ссылка на новое место
     
-// добавить удаление карточки
-
+// событие по клику на удаление - вызов функции удаления карточки
 newCard.querySelector(".elements__delete").addEventListener('click', () => {
     deleteCard(newCard);
 })
 // добавить клик по картинке 
-// добавить лайк по карточке
+
+
+
+// функция лайка по карточке
+newCard.querySelector(".elements__like").addEventListener('click', function(evt) {
+    evt.target.classList.toggle("elements__like_active");
+})
+
 
     list.prepend(newCard);
 }
 
+//функция удаления карточки
 function deleteCard(item){
     item.remove();
 }
+
+
+
 // обработчик событий по добавлению новой карточки 
 function createCard(evt) {
     evt.preventDefault();// Эта строчка отменяет стандартную отправку формы.
