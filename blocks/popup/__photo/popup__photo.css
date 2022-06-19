@@ -1,6 +1,6 @@
-.popup__photo{
+.popup__photo {
     max-height: 75vh;
     max-width: 75vw;
-    margin: auto;
+    margin: 0 auto 0;
     padding: 0;
 }
