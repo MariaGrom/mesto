@@ -73,10 +73,10 @@ const formInputName = document.querySelector(".popup-place__text_type_name");
 const formInputLink = document.querySelector(".popup-place__text_type_link");
 
 //функция добавления карточки
-function addCard(nameValue, linkValue) {
+function addCard(name, link) {
     const newCard = itemTemplate.querySelector(".elements__item").cloneNode(true); //клонируем элемент списка из документ-фрагмента
-    newCard.querySelector(".elements__title").textContent = nameValue; //название нового места
-    newCard.querySelector(".elements__photo").src = linkValue; //ссылка на новое место
+    newCard.querySelector(".elements__title").textContent = name; //название нового места
+    newCard.querySelector(".elements__photo").src = link; //ссылка на новое место
     
 // добавить удаление карточки
 
@@ -106,4 +106,8 @@ function createCard(evt) {
 
 form.addEventListener('submit', createCard); 
 
-//initialCards.forEach(addCard);
+
+//Перебор массива под существующие функции добавления/удаление/лайки карточки 
+initialCards.forEach(function(item){
+    addCard(item.name, item.link);
+});
