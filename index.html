@@ -31,54 +31,6 @@
         </section>
         <section class="elements">
             <ul class="elements__items">
-                <!-- <li class="elements__item">
-                    <img class="elements__photo" src="images/karachaevo.jpg" alt="Фото публикации">
-                    <div class="elements__description">
-                        <h2 class="elements__title">Карачаево</h2>
-                        <button class="elements__like elements__like_active"></button>
-                    </div>
-                    <button class="elements__delete"></button>
-                </li>
-                <li class="elements__item">
-                    <img class="elements__photo" src="images/elbrus.png" alt="Фото публикации">
-                    <div class="elements__description">
-                        <h2 class="elements__title">Гора Эльбрус</h2>
-                        <button class="elements__like elements__like_active"></button>
-                    </div>
-                    <button class="elements__delete"></button>
-                </li>
-                <li class="elements__item">
-                    <img class="elements__photo" src="images/dombai.png" alt="Фото публикации">
-                    <div class="elements__description">
-                        <h2 class="elements__title">Домбай</h2>
-                        <button class="elements__like elements__like_active"></button>
-                    </div>
-                    <button class="elements__delete"></button>
-                </li>
-                <li class="elements__item">
-                    <img class="elements__photo" src="images/elbrus.png" alt="Фото публикации">
-                    <div class="elements__description">
-                        <h2 class="elements__title">Гора Эльбрус</h2>
-                        <button class="elements__like elements__like_active"></button>
-                    </div>
-                    <button class="elements__delete"></button>
-                </li>
-                <li class="elements__item">
-                    <img class="elements__photo" src="images/dombai.png" alt="Фото публикации">
-                    <div class="elements__description">
-                        <h2 class="elements__title">Домбай</h2>
-                        <button class="elements__like elements__like_active"></button>
-                    </div>
-                    <button class="elements__delete"></button>
-                </li>
-                <li class="elements__item">
-                    <img class="elements__photo" src="images/karachaevo.jpg" alt="Фото публикации">
-                    <div class="elements__description">
-                        <h2 class="elements__title">Карачаево-Черкесская</h2>
-                        <button class="elements__like elements__like_active"></button>
-                    </div>
-                    <button class="elements__delete"></button>
-                </li> -->
             </ul>
         </section>
         <div class="popup popup_hidden">
@@ -92,8 +44,9 @@
                 <button type="submit" class="popup__submit-button">Сохранить</button>
             </form>
         </div>
-        <div class="popup-place popup-place_hidden">
-            <form class="popup-place__content">
+
+        <div class="popup popup_place popup_hidden">
+            <form class="popup__content popup__content_place">
                 <button type="button" class="popup-place__close-button"></button>
                 <h2 class="popup__title">Новое место</h2>
                 <input type="text" name="place__name" placeholder="Название"
@@ -103,32 +56,35 @@
                 <button type="submit" class="popup__submit-button">Создать</button>
             </form>
         </div>
-        <!-- заготовка под попап для картинки большого изображения
-            <div class="popup-image popup-image_hidden">
-            <img class="popup-image__item" alt="Фото места">
-            <figcaption class="popup-image__caption"></figcaption>
-            <button type="button" class="popup-image__close-button"></button>
-        </div>-->
+
+        <div class="popup popup_photo popup_hidden">
+            <div class="popup__content_photo">
+                <img class="popup__photo" alt="Фото места">
+                <figcaption class="popup__caption">Название места</figcaption>
+            <button type="button" class="popup__close-button"></button>
+            </div>
+        </div>
+
     </main>
     <footer class="footer">
         <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
     </footer>
 
 
-<template class="item__template">
-    <li class="elements__item">
-        <img class="elements__photo" alt="Фото публикации">
-        <div class="elements__description">
-            <h2 class="elements__title"></h2>
-            <button class="elements__like"></button>
-        </div>
-        <button class="elements__delete"></button>
-    </li> 
-</template>
+    <template class="item__template">
+        <li class="elements__item">
+            <img class="elements__photo" alt="Фото публикации">
+            <div class="elements__description">
+                <h2 class="elements__title"></h2>
+                <button class="elements__like"></button>
+            </div>
+            <button class="elements__delete"></button>
+        </li>
+    </template>
 
 
-<script src="./scripts/cards.js"></script>
-<script src="./scripts/index.js"></script>
+    <script src="./scripts/cards.js"></script>
+    <script src="./scripts/index.js"></script>
 </body>
 
 </html>

@@ -4,9 +4,7 @@
 const buttonOpen = document.querySelector('.profile__edit-button');//Находим кнопки 
 const popup = document.querySelector('.popup');
 const popupCloseButton = document.querySelector('.popup__close-button');
-
 let formElement = document.querySelector('.popup__content');// Находим форму в DOM
-
 let nameInput = formElement.querySelector('.popup__text_type_name');// Находим поля формы в DOM
 let jobInput = formElement.querySelector('.popup__text_type_description');// Находим имя и работу в профили, которые нужно будет изменить 
 let newName = document.querySelector('.profile__title');
@@ -41,38 +39,47 @@ function formSubmitHandler(evt) {
 // Прикрепляем обработчик к форме:он будет следить за событием “submit” - «отправка»
 formElement.addEventListener('submit', formSubmitHandler); 
 
+
+
+
+
+
 // Добавление попапа для Нового места
 const buttonAddOpen = document.querySelector('.profile__add-button');
-const popupPlace = document.querySelector('.popup-place');
+const popupPlace = document.querySelector('.popup_place');
 const popupPlaceCloseButton = document.querySelector('.popup-place__close-button');
 
 //объявим функцию открытия попапа места
 function popupPlaceOpen() {
-    popupPlace.classList.remove('popup-place_hidden');
+    popupPlace.classList.remove('popup_hidden');
 }
 
 //Слушатель действий. Попап места открыт
 buttonAddOpen.addEventListener('click', popupPlaceOpen);
 
+
 // объявим функцю закрытия попапа места
 function popupPlaceClose() {
-    popupPlace.classList.add('popup-place_hidden');
+    popupPlace.classList.add('popup_hidden');
 }
 
 //Слушатель действий. Попап закрыт
 popupPlaceCloseButton.addEventListener('click', popupPlaceClose);
 
 
+
+
+
+
 // Добавление карточек
 
 const itemTemplate = document.querySelector(".item__template").content;
 const list = document.querySelector(".elements__items");
-const form = document.querySelector(".popup-place__content");
+const form = document.querySelector(".popup__content_place");
 const formButton = document.querySelector(".popup__submit-button"); // нужна ли она мне?
 const formInputName = document.querySelector(".popup-place__text_type_name");
 const formInputLink = document.querySelector(".popup-place__text_type_link");
 const buttonLike = document.querySelector(".elements__like");
-
 
 //функция добавления карточки
 function addCard(name, link) {
@@ -93,7 +100,6 @@ newCard.querySelector(".elements__like").addEventListener('click', function(evt)
     evt.target.classList.toggle("elements__like_active");
 })
 
-
     list.prepend(newCard);
 }
 
@@ -101,8 +107,6 @@ newCard.querySelector(".elements__like").addEventListener('click', function(evt)
 function deleteCard(item){
     item.remove();
 }
-
-
 
 // обработчик событий по добавлению новой карточки 
 function createCard(evt) {
@@ -123,3 +127,9 @@ form.addEventListener('submit', createCard);
 initialCards.forEach(function(item){
     addCard(item.name, item.link);
 });
+
+
+// Реализация открытия карточки крупным планом 
+
+//1. Открытие попапа
+

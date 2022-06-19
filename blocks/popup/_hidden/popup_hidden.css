@@ -1,3 +1,5 @@
 .popup_hidden {
-    display: none;
+    position: absolute;
+    visibility: hidden;
+    opacity: 0;
 }
