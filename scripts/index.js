@@ -1,3 +1,17 @@
+/* 
+
+включение валидации вызовом enableValidation
+все настройки передаются при вызове 
+
+enableValidation({
+    formSelector: '.popup__form',
+    inputSelector: '.popup__input',
+    submitButtonSelector: '.popup__button',
+    inactiveButtonClass: 'popup__button_disabled',
+    inputErrorClass: 'popup__input_type_error',
+    errorClass: 'popup__error_visible'
+  }); */
+
 // Попал для изменения профиля пользователя
 const buttonOpen = document.querySelector('.profile__edit-button');
 const popup = document.querySelector('.popup');
@@ -9,16 +23,16 @@ const newName = document.querySelector('.profile__title');
 const newJob = document.querySelector('.profile__subtitle');
 const popupProfile = document.querySelector('.popup_edit-profile')
 
-function popupOpen(popup) {
+function openPopup(popup) {
     popup.classList.remove('popup_hidden');
 }
 
-function popupClose(popup) {
+function closePopup(popup) {
     popup.classList.add('popup_hidden');
 }
 
 function handleProfile() {
-    popupOpen(popupProfile);
+    openPopup(popupProfile);
     nameInput.value = newName.textContent;
     jobInput.value = newJob.textContent;
 }
@@ -28,7 +42,7 @@ buttonOpen.addEventListener('click', handleProfile);
 
 //Слушатель действий. Попап закрыт
 popupCloseButton.addEventListener('click', function () {
-    popupClose(popupProfile);
+    closePopup(popupProfile);
 });
 
 // Обработчик «отправки» формы, хотя пока она никуда отправляться не будет
@@ -36,7 +50,7 @@ function submitEditProfileForm(evt) {
     evt.preventDefault();
     newName.textContent = nameInput.value; //новые элементы полей
     newJob.textContent = jobInput.value;
-    popupClose(popupProfile);
+    closePopup(popupProfile);
 }
 
 // Прикрепляем обработчик к форме:он будет следить за событием “submit” - «отправка»
@@ -51,17 +65,17 @@ const buttonClosePhoto = popupPhoto.querySelector('.popup__close-button');
 
 //Слушатель действий. Попап места открыт
 buttonAddOpen.addEventListener('click', function () {
-    popupOpen(popupPlace);
+    openPopup(popupPlace);
 })
 
 //Слушатель действий. Попап места закрыт
 popupPlaceCloseButton.addEventListener('click', function () {
-    popupClose(popupPlace);
+    closePopup(popupPlace);
 })
 
 //Слушатель действий. Попап фото закрыт
 buttonClosePhoto.addEventListener('click', function () {
-    popupClose(popupPhoto);
+    closePopup(popupPhoto);
 })
 
 // Добавление карточек
@@ -92,7 +106,7 @@ function createCard(name, link) {
         popupPhotoImg.alt = name;
         popupPhotoTitle.textContent = name;
 
-        popupOpen(popupPhoto);
+        openPopup(popupPhoto);
     });
 
     // событие по клику - функция лайка по карточке
@@ -122,7 +136,7 @@ function submitAddCardForm(evt) {
     formInputName.value = '';
     formInputLink.value = '';
 
-    popupClose(popupPlace);
+    closePopup(popupPlace);
 }
 
 formAddCard.addEventListener('submit', submitAddCardForm);
