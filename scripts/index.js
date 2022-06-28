@@ -1,17 +1,3 @@
-/* 
-
-включение валидации вызовом enableValidation
-все настройки передаются при вызове 
-
-enableValidation({
-    formSelector: '.popup__form',
-    inputSelector: '.popup__input',
-    submitButtonSelector: '.popup__button',
-    inactiveButtonClass: 'popup__button_disabled',
-    inputErrorClass: 'popup__input_type_error',
-    errorClass: 'popup__error_visible'
-  }); */
-
 // Попал для изменения профиля пользователя
 const buttonOpen = document.querySelector('.profile__edit-button');
 const popup = document.querySelector('.popup');
@@ -145,3 +131,17 @@ formAddCard.addEventListener('submit', submitAddCardForm);
 initialCards.forEach(function (item) {
     addCard(createCard(item.name, item.link));
 })
+
+
+  /* 
+включение валидации вызовом enableValidation
+все настройки передаются при вызове */
+
+enableValidation = {
+    formSelector: '.popup__form',
+    inputSelector: '.popup__input',
+    submitButtonSelector: '.popup__button',
+    inactiveButtonClass: 'popup__button_disabled',
+    inputErrorClass: 'popup__input_type_error',
+    errorClass: 'popup__error_visible'
+  };
