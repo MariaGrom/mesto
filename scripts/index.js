@@ -1,3 +1,12 @@
+selectorValidation = {
+    formSelector: '.popup__form',
+    inputSelector: '.popup__input',
+    submitButtonSelector: '.popup__button',
+    inactiveButtonClass: 'popup__button_disabled',
+    inputErrorClass: 'popup__input_type_error',
+    errorClass: 'popup__error_visible'
+  };
+
 // Попал для изменения профиля пользователя
 const buttonOpen = document.querySelector('.profile__edit-button');
 const popup = document.querySelector('.popup');
@@ -9,12 +18,27 @@ const newName = document.querySelector('.profile__title');
 const newJob = document.querySelector('.profile__subtitle');
 const popupProfile = document.querySelector('.popup_edit-profile')
 
+
+function closePopupOnQ (e) {   // не работает, как надо! почему? закрывает только попап профиля
+    if (e.code === 'KeyQ') {   //  Esc не ловится на keypress. временное решение на "Q" 
+        closePopup(popup);
+    }
+}
+
 function openPopup(popup) {
     popup.classList.remove('popup_hidden');
+    document.addEventListener('keypress', closePopupOnQ)
 }
+
 
 function closePopup(popup) {
     popup.classList.add('popup_hidden');
+    popup.addEventListener('click', function (e) {
+        if (e.target === e.currentTarget) {
+            popup.classList.add('popup_hidden');
+        }
+    });
+    document.removeEventListener('keypress', closePopupOnQ);
 }
 
 function handleProfile() {
@@ -30,6 +54,7 @@ buttonOpen.addEventListener('click', handleProfile);
 popupCloseButton.addEventListener('click', function () {
     closePopup(popupProfile);
 });
+
 
 // Обработчик «отправки» формы, хотя пока она никуда отправляться не будет
 function submitEditProfileForm(evt) {
@@ -131,17 +156,3 @@ formAddCard.addEventListener('submit', submitAddCardForm);
 initialCards.forEach(function (item) {
     addCard(createCard(item.name, item.link));
 })
-
-
-  /* 
-включение валидации вызовом enableValidation
-все настройки передаются при вызове */
-
-enableValidation = {
-    formSelector: '.popup__form',
-    inputSelector: '.popup__input',
-    submitButtonSelector: '.popup__button',
-    inactiveButtonClass: 'popup__button_disabled',
-    inputErrorClass: 'popup__input_type_error',
-    errorClass: 'popup__error_visible'
-  };

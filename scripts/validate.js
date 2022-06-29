@@ -1,12 +1,5 @@
 const formElement = document.querySelector('.popup__form');
 const formInput = formElement.querySelector('.popup__input');
-  
-  // Слушатель события input
-  formInput.addEventListener('input', function (evt) {
-    // Выведем в консоль значение свойства validity.valid поля ввода, 
-    // на котором слушаем событие input
-    console.log(evt.target.validity.valid);
-  }); 
 
 // Функция, которая добавляет класс с ошибкой
 const showInputError = (formElement, inputElement, errorMessage) => {
@@ -45,27 +38,56 @@ formElement.addEventListener('submit', function (evt) {
   evt.preventDefault();
 });
 
-// Вызовем функцию isValid на каждый ввод символа
+const hasInvalidInput = (inputList) => {
+    // проходим по этому массиву методом some
+    return inputList.some((inputElement) => {
+      // Если поле не валидно, колбэк вернёт true
+      // Обход массива прекратится и вся функция
+      // hasInvalidInput вернёт true
+  
+      return !inputElement.validity.valid;
+    })
+  }; 
+
+  // Функция принимает массив полей ввода
+// и элемент кнопки, состояние которой нужно менять
+
+const toggleButtonState = (inputList, buttonElement) => {
+    // Если есть хотя бы один невалидный инпут
+    if (hasInvalidInput(inputList)) {
+      // сделай кнопку неактивной
+      buttonElement.classList.add('popup__button_disabled');
+    } else {
+      // иначе сделай кнопку активной
+      buttonElement.classList.remove('popup__button_disabled');
+    }
+  };
+
+  // Вызовем функцию isValid на каждый ввод символа
 //formInput.addEventListener('input', isValid);
 //взамен ей напишем слушатель на каждое поле ввода
 
 const setEventListeners = (formElement) => {
-    // Находим все поля внутри формы,
-    // сделаем из них массив методом Array.from
+    // Находим все поля внутри формы,сделаем из них массив методом Array.from
     const inputList = Array.from(formElement.querySelectorAll('.popup__input'));
+
+    const buttonElement = formElement.querySelector('.popup__button');
+    toggleButtonState(inputList, buttonElement);
+
 // Обойдём все элементы полученной коллекции
 inputList.forEach((inputElement) => {
     // каждому полю добавим обработчик события input
     inputElement.addEventListener('input', () => {
       // Внутри колбэка вызовем isValid,
       // передав ей форму и проверяемый элемент
-      isValid(formElement, inputElement)
+      isValid(formElement, inputElement);
+      toggleButtonState(inputList, buttonElement);
     });
   });
 }; 
 
 
-const fenableValidation = () => {
+const enableValidation = () => {
     // Найдём все формы с указанным классом в DOM,
     // сделаем из них массив методом Array.from
     const formList = Array.from(document.querySelectorAll('.popup__form'));
@@ -84,4 +106,9 @@ const fenableValidation = () => {
   };
   
   // Вызовем функцию
-  fenableValidation();
+  enableValidation();
+
+  
+
+
+  
