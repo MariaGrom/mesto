@@ -32,11 +32,6 @@ const isValid = (formElement, inputElement) => {
     hideInputError(formElement, inputElement);
   }
 };
- 
-formElement.addEventListener('submit', function (evt) {
-  // Отменим стандартное поведение по сабмиту
-  evt.preventDefault();
-});
 
 const hasInvalidInput = (inputList) => {
     // проходим по этому массиву методом some
@@ -56,9 +51,11 @@ const toggleButtonState = (inputList, buttonElement) => {
     // Если есть хотя бы один невалидный инпут
     if (hasInvalidInput(inputList)) {
       // сделай кнопку неактивной
+      buttonElement.setAttribute('disabled', true);
       buttonElement.classList.add('popup__button_disabled');
     } else {
       // иначе сделай кнопку активной
+      buttonElement.setAttribute('disabled', false);
       buttonElement.classList.remove('popup__button_disabled');
     }
   };

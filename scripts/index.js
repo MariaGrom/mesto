@@ -9,36 +9,42 @@ selectorValidation = {
 
 // Попал для изменения профиля пользователя
 const buttonOpen = document.querySelector('.profile__edit-button');
-const popup = document.querySelector('.popup');
+const popup = document.querySelectorAll('.popup');
 const popupCloseButton = document.querySelector('.popup__close-button');
 const formEditProfile = document.querySelector('.popup__content');
 const nameInput = formEditProfile.querySelector('.popup__text_type_name');
 const jobInput = formEditProfile.querySelector('.popup__text_type_description');
 const newName = document.querySelector('.profile__title');
 const newJob = document.querySelector('.profile__subtitle');
-const popupProfile = document.querySelector('.popup_edit-profile')
+const popupProfile = document.querySelector('.popup_edit-profile');
 
 
-function closePopupOnQ (e) {   // не работает, как надо! почему? закрывает только попап профиля
-    if (e.code === 'KeyQ') {   //  Esc не ловится на keypress. временное решение на "Q" 
+function closePopupOnQ (evt) {
+    if (evt.key === 'Escape') {  
+        const popup = document.querySelector('.popup_opened');
         closePopup(popup);
     }
 }
 
+function closePopupByOverlay (evt) {
+    if (evt.target === evt.currentTarget) {
+    const popup = document.querySelector('.popup_opened');
+    closePopup(popup);
+    }
+}
+
+
 function openPopup(popup) {
-    popup.classList.remove('popup_hidden');
-    document.addEventListener('keypress', closePopupOnQ)
+    document.addEventListener('keydown', closePopupOnQ);
+    popup.addEventListener('click', closePopupByOverlay);
+    popup.classList.add('popup_opened');
 }
 
 
 function closePopup(popup) {
-    popup.classList.add('popup_hidden');
-    popup.addEventListener('click', function (e) {
-        if (e.target === e.currentTarget) {
-            popup.classList.add('popup_hidden');
-        }
-    });
-    document.removeEventListener('keypress', closePopupOnQ);
+    document.removeEventListener('keydown', closePopupOnQ);
+    popup.removeEventListener('click', closePopupByOverlay);
+    popup.classList.remove('popup_opened');
 }
 
 function handleProfile() {
