@@ -8,7 +8,7 @@ const config = {
 };
 
 // Функция, которая добавляет класс с ошибкой
-const showInputError = (formElement, inputElement, errorMessage) => {
+const showInputError = (formElement, inputElement, errorMessage, config) => {
     const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
     inputElement.classList.add(config.inputErrorClass);
     errorElement.classList.add(config.errorClass);
@@ -16,7 +16,7 @@ const showInputError = (formElement, inputElement, errorMessage) => {
 };
 
 // Функция, которая удаляет класс с ошибкой
-const hideInputError = (formElement, inputElement) => {
+const hideInputError = (formElement, inputElement, config) => {
     const errorElement = formElement.querySelector(`.${inputElement.id}-error`); // Находим элемент ошибки
     inputElement.classList.remove(config.inputErrorClass);
     errorElement.classList.remove(config.errorClass);
@@ -24,11 +24,11 @@ const hideInputError = (formElement, inputElement) => {
 };
 
 // Функция, которая проверяет валидность поля
-const isValid = (formElement, inputElement) => {
+const isValid = (formElement, inputElement, config) => {
     if (!inputElement.validity.valid) {
-        showInputError(formElement, inputElement, inputElement.validationMessage);   // Если поле не проходит валидацию, покажем ошибку
+        showInputError(formElement, inputElement, inputElement.validationMessage, config);   // Если поле не проходит валидацию, покажем ошибку
     } else {
-        hideInputError(formElement, inputElement); // Если проходит, скроем
+        hideInputError(formElement, inputElement, config); // Если проходит, скроем
     }
 };
 
@@ -39,15 +39,21 @@ const hasInvalidInput = (inputList) => {
     })
 };
 
+const disabledButton = (buttonElement, config) => {
+    buttonElement.disabled = true;
+    buttonElement.classList.add(config.inactiveButtonClass);
+}
 
+const ableButton = (buttonElement, config) => {
+    buttonElement.disabled = false;
+    buttonElement.classList.remove(config.inactiveButtonClass);
+}
 // Функция принимает массив полей ввода и элемент кнопки, состояние которой нужно менять
-const toggleButtonState = (inputList, buttonElement) => {
+const toggleButtonState = (inputList, buttonElement, config) => {
     if (hasInvalidInput(inputList)) {
-        buttonElement.disabled = true;
-        buttonElement.classList.add(config.inactiveButtonClass);
+        disabledButton(buttonElement, config);
     } else {
-        buttonElement.disabled = false;
-        buttonElement.classList.remove(config.inactiveButtonClass);
+        ableButton(buttonElement, config);
     }
 };
 
@@ -55,16 +61,16 @@ const toggleButtonState = (inputList, buttonElement) => {
 //formInput.addEventListener('input', isValid);
 //взамен ей напишем слушатель на каждое поле ввода
 
-const setEventListeners = (formElement) => {
+const setEventListeners = (formElement, config) => {
     const inputList = Array.from(formElement.querySelectorAll(config.inputSelector));
     const buttonElement = formElement.querySelector(config.submitButtonSelector);
-    toggleButtonState(inputList, buttonElement);
+    toggleButtonState(inputList, buttonElement, config);
 
     // Обойдём все элементы полученной коллекции
     inputList.forEach((inputElement) => {
         inputElement.addEventListener('input', () => {
-            isValid(formElement, inputElement);
-            toggleButtonState(inputList, buttonElement);
+            isValid(formElement, inputElement, config);
+            toggleButtonState(inputList, buttonElement, config);
         });
     });
 };
@@ -82,4 +88,4 @@ const enableValidation = (config) => {
     });
 };
 
-enableValidation (config);
+enableValidation(config);

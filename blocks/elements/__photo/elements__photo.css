@@ -5,3 +5,7 @@
     width: 282px;
     height: 282px;
 }
+
+.elements__photo:hover {
+    opacity: 0.8;
+}
