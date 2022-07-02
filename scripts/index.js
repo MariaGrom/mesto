@@ -1,11 +1,13 @@
-selectorValidation = {
+config = {
     formSelector: '.popup__form',
     inputSelector: '.popup__input',
     submitButtonSelector: '.popup__button',
     inactiveButtonClass: 'popup__button_disabled',
     inputErrorClass: 'popup__input_type_error',
     errorClass: 'popup__error_visible'
-  };
+};
+
+enableValidation (config);
 
 // Попал для изменения профиля пользователя
 const buttonOpen = document.querySelector('.profile__edit-button');
@@ -19,20 +21,19 @@ const newJob = document.querySelector('.profile__subtitle');
 const popupProfile = document.querySelector('.popup_edit-profile');
 
 
-function closePopupOnQ (evt) {
-    if (evt.key === 'Escape') {  
+function closePopupOnQ(evt) {
+    if (evt.key === 'Escape') {
         const popup = document.querySelector('.popup_opened');
         closePopup(popup);
     }
 }
 
-function closePopupByOverlay (evt) {
+function closePopupByOverlay(evt) {
     if (evt.target === evt.currentTarget) {
-    const popup = document.querySelector('.popup_opened');
-    closePopup(popup);
+        const popup = document.querySelector('.popup_opened');
+        closePopup(popup);
     }
 }
-
 
 function openPopup(popup) {
     document.addEventListener('keydown', closePopupOnQ);
@@ -60,7 +61,6 @@ buttonOpen.addEventListener('click', handleProfile);
 popupCloseButton.addEventListener('click', function () {
     closePopup(popupProfile);
 });
-
 
 // Обработчик «отправки» формы, хотя пока она никуда отправляться не будет
 function submitEditProfileForm(evt) {
@@ -161,4 +161,5 @@ formAddCard.addEventListener('submit', submitAddCardForm);
 //Перебор массива под существующие функции добавления/удаление/лайки карточки 
 initialCards.forEach(function (item) {
     addCard(createCard(item.name, item.link));
-})
+});
+
