@@ -1,11 +1,11 @@
-/*const config = {
+const config = {
     formSelector: '.popup__form',
     inputSelector: '.popup__input',
     submitButtonSelector: '.popup__button',
     inactiveButtonClass: 'popup__button_disabled',
     inputErrorClass: 'popup__input_type_error',
     errorClass: 'popup__error_visible'
-};*/
+};
 
 // Функция, которая добавляет класс с ошибкой
 const showInputError = (formElement, inputElement, errorMessage) => {
@@ -18,7 +18,6 @@ const showInputError = (formElement, inputElement, errorMessage) => {
 // Функция, которая удаляет класс с ошибкой
 const hideInputError = (formElement, inputElement) => {
     const errorElement = formElement.querySelector(`.${inputElement.id}-error`); // Находим элемент ошибки
-
     inputElement.classList.remove(config.inputErrorClass);
     errorElement.classList.remove(config.errorClass);
     errorElement.textContent = ''; // Очистим ошибку
@@ -40,14 +39,14 @@ const hasInvalidInput = (inputList) => {
     })
 };
 
-// Функция принимает массив полей ввода и элемент кнопки, состояние которой нужно менять
 
+// Функция принимает массив полей ввода и элемент кнопки, состояние которой нужно менять
 const toggleButtonState = (inputList, buttonElement) => {
     if (hasInvalidInput(inputList)) {
-        buttonElement.setAttribute('disabled', true);
+        buttonElement.disabled = true;
         buttonElement.classList.add(config.inactiveButtonClass);
     } else {
-        buttonElement.setAttribute('disabled', false);
+        buttonElement.disabled = false;
         buttonElement.classList.remove(config.inactiveButtonClass);
     }
 };
@@ -70,7 +69,6 @@ const setEventListeners = (formElement) => {
     });
 };
 
-
 const enableValidation = (config) => {
     // Найдём все формы с указанным классом в DOM, сделаем из них массив методом Array.from
     const formList = Array.from(document.querySelectorAll(config.formSelector));
@@ -84,5 +82,4 @@ const enableValidation = (config) => {
     });
 };
 
-
-//enableValidation (config);
+enableValidation (config);

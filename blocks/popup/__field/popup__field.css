@@ -1,3 +1,7 @@
 .popup__field {
     border: none;
+    height: 50px ;
+    width: 100%;
+    margin: 0 auto 0;
+    padding: 13px 0 0;
 }
