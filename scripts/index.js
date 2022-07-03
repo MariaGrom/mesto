@@ -80,12 +80,11 @@ const popupPlaceCloseButton = popupPlace.querySelector('.popup__close-button');
 const popupPhoto = document.querySelector('.popup_photo');
 const buttonClosePhoto = popupPhoto.querySelector('.popup__close-button');
 
-//Слушатель действий. Попап места открыт
+//Слушатель действий. Попап места открыт: сброс формы, открытие попапа Места, блокировка кнопки
 buttonAddOpen.addEventListener('click', function () {
     formAddCard.reset();
-
     openPopup(popupPlace);
-    disabledButton(formAddCard.submit, config); //Не работает ((__|__))
+    disabledButton(formAddCard.submit, config); 
 })
 
 //Слушатель действий. Попап места закрыт
@@ -160,17 +159,6 @@ function submitAddCardForm(evt) {
 
     closePopup(popupPlace);
 }
-
-
-/*buttonAddCard.addEventListener('click', () => {
-    //formInputName.value = '';
-    //formInputLink.value = '';
-
-   
-
-
-})*/
-
 
 formAddCard.addEventListener('submit', submitAddCardForm);
 

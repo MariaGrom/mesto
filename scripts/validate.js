@@ -44,7 +44,7 @@ const disabledButton = (buttonElement, config) => {
     buttonElement.classList.add(config.inactiveButtonClass);
 }
 
-const ableButton = (buttonElement, config) => {
+const enableButton = (buttonElement, config) => {
     buttonElement.disabled = false;
     buttonElement.classList.remove(config.inactiveButtonClass);
 }
@@ -53,7 +53,7 @@ const toggleButtonState = (inputList, buttonElement, config) => {
     if (hasInvalidInput(inputList)) {
         disabledButton(buttonElement, config);
     } else {
-        ableButton(buttonElement, config);
+        enableButton(buttonElement, config);
     }
 };
 
