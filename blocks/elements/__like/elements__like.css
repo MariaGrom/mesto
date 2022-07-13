@@ -1,13 +1,13 @@
 .elements__like {
-    background: url(../../../images/like_inactive.png);
-    border: 0;
-    width: 23px;
-    height: 19px;
-    background-repeat: no-repeat;
-    background-position: center;
-    margin: 0;
+  background: url(../../../images/like_inactive.png);
+  border: 0;
+  width: 23px;
+  height: 19px;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin: 0;
 }
 
 .elements__like:hover {
-    opacity: 0.5;
+  opacity: 0.5;
 }

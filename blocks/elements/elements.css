@@ -1,17 +1,17 @@
 .elements {
-    width: calc(100% - 2 * 200px);
-    margin: 0 auto 0;
-    padding: 46.25px 0 0px;
+  width: calc(100% - 2 * 200px);
+  margin: 0 auto 0;
+  padding: 46.25px 0 0px;
 }
 
 @media screen and (max-width: 1024px) {
-    .elements {
-        width: calc(100% - 2 * 100px);
-    }
+  .elements {
+    width: calc(100% - 2 * 100px);
+  }
 }
 
 @media screen and (max-width: 496px) {
-    .elements {
-        width: calc(100% - 2 * 19px);
-    }
+  .elements {
+    width: calc(100% - 2 * 19px);
+  }
 }

@@ -1,7 +1,7 @@
 .elements__description {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    margin: 0;
-    padding: 25px 20px 0 21px;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin: 0;
+  padding: 25px 20px 0 21px;
 }
