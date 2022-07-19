@@ -1,4 +1,4 @@
-const config = {
+export const configSelector = {
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
   submitButtonSelector: '.popup__button',
@@ -7,6 +7,7 @@ const config = {
   errorClass: 'popup__error_visible',
 };
 
+/*
 // Функция, которая добавляет класс с ошибкой
 const showInputError = (formElement, inputElement, errorMessage, config) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
@@ -89,3 +90,4 @@ const enableValidation = (config) => {
 };
 
 enableValidation(config);
+*/
