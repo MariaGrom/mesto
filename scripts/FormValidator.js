@@ -1,9 +1,10 @@
 export class FormValidator {
-  constructor(formElement, config) {
-    this._formElement = formElement;
-    console.log(this._formElement);
+  constructor(config, formElement) {
     this._config = config;
-    console.log(this._config);
+    this._formElement = formElement;
+    this._inputList = Array.from(this._formElement.querySelectorAll(this._config.inputSelector));
+    this._buttonElement = this._formElement.querySelector(this._config.submitButtonSelector);
+
   }
   
   // Метод добавления класса с ошибкой
@@ -25,16 +26,16 @@ export class FormValidator {
   //Метод проверки валидности поля
   _isValid(inputElement) {
     if (!inputElement.validity.valid) {
-      this._showInputError(this._formElement, inputElement, inputElement.validationMessage, this._config);   // Если поле не проходит валидацию, покажем ошибку
+      this._showInputError(inputElement, inputElement.validationMessage);   // Если поле не проходит валидацию, покажем ошибку
     } else {
-      this._hideInputError(this._formElement, inputElement, this._config); // Если проходит, скроем
+      this._hideInputError(inputElement); // Если проходит, скроем
     }
   }
 
   // 
   _hasInvalidInput() {
     // проходим по этому массиву методом some
-    return inputList.some((inputElement) => {
+    return this._inputList.some((inputElement) => {
       return !inputElement.validity.valid;
       
     });
@@ -42,52 +43,55 @@ export class FormValidator {
 
   // Метод не активной кнопки
   disabledButton () {
-    buttonElement.setAttribute('disabled', true);
-    buttonElement.classList.add(this._config.inactiveButtonClass);
+    this._buttonElement.setAttribute('disabled', true);
+    this._buttonElement.classList.add(this._config.inactiveButtonClass);
   }
 
   //Метод активной кнопки
   enableButton() {
-    buttonElement.removeAttribute('disabled');
-    buttonElement.classList.remove(this._config.inactiveButtonClass);
+    this._buttonElement.removeAttribute('disabled');
+    this._buttonElement.classList.remove(this._config.inactiveButtonClass);
   }
 
   //Функция принимает массив полей ввода и элемент кнопки, состояние которой нужно менять
   _toggleButtonState  () {
     if (this._hasInvalidInput()) {
-      this.disabledButton(buttonElement, this._config);
+      this.disabledButton();
     } else {
-      this.enableButton(buttonElement, this._config);
+      this.enableButton();
     }
   }
 
 
-//
+/// Вызовем функцию isValid на каждый ввод символа
+// formInput.addEventListener('input', isValid);
+// Взамен ей напишем слушатель на каждое поле ввода
+
 _setEventListeners() {
-   this._inputList = Array.from(this._formElement.querySelectorAll(this._config.inputSelector));
-  
-  this._buttonElement = this._formElement.querySelector(this._config.submitButtonSelector);
+ 
   this._toggleButtonState();
 
   // Обойдём все элементы полученной коллекции
-  inputList.forEach((inputElement) => {
+
+  this._inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', () => {
       this._isValid(inputElement);
       this._toggleButtonState();
     });
   });
+
 };
 
 
-enableValidation () {
-  // Функция проверки для одной формы
-    //this._formElement.addEventListener('submit', (evt) => {
-
-      //evt.preventDefault();
-    //});
-    // Для каждой формы вызовем функцию setEventListeners, передав ей элемент формы
+// Для каждой формы вызовем функцию setEventListeners, передав ей элемент формы
+enableValidation () { 
    this._setEventListeners();
 };
 
+  // Функция переключения кнопки в попапе при его открытии и очищение списка ошибок.
+  resetValidation() {
+    this._toggleButtonState();
+
+  }
 
 }

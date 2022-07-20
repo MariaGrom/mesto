@@ -64,11 +64,6 @@ function submitEditProfileForm(evt) {
   closePopup(popupProfile);
 }
 
-const formProfile = new FormValidator (configSelector, formAddProfile);
-formProfile.enableValidation();
-
-const formCard = new FormValidator (configSelector, formAddCard);
-formCard.enableValidation();
 
 // Прикрепляем обработчик к форме:он будет следить за событием “submit” - «отправка»
 formEditProfile.addEventListener('submit', submitEditProfileForm);
@@ -82,9 +77,9 @@ const buttonClosePhoto = popupPhoto.querySelector('.popup__close-button');
 
 // Слушатель действий. Попап места открыт: сброс формы, открытие попапа Места, блокировка кнопки
 buttonAddOpen.addEventListener('click', function () {
-  formAddCard.reset();
+  formAddCard.reset(); 
   openPopup(popupPlace);
-  disabledButton(formAddCard.submit, config);
+  formCard.resetValidation();
 })
 
 //Слушатель действий. Попап места закрыт
@@ -151,3 +146,8 @@ initialCards.forEach((item) => {
   addCard(cardElement);
 })
 
+const formProfile = new FormValidator (configSelector, formAddProfile);
+formProfile.enableValidation();
+
+const formCard = new FormValidator (configSelector, formAddCard);
+formCard.enableValidation();
