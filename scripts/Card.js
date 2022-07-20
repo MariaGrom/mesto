@@ -30,8 +30,8 @@ export class Card {
     titlePhoto.textContent = this._name;
 
     this._likeButton = this._element.querySelector('.elements__like');
-    
-    this._setEventListeners()
+
+    this._setEventListeners();
 
     return this._element;
   }
@@ -39,7 +39,8 @@ export class Card {
   // Метод удаление карточки
   _deleteCard() {
    
-      this._element.remove()
+      this._element.remove();
+      this._element = null;
     
   }
 
