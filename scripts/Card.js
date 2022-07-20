@@ -28,38 +28,29 @@ export class Card {
     elementsPhoto.alt = this._name;
     const titlePhoto = this._element.querySelector('.elements__title');
     titlePhoto.textContent = this._name;
-    this._deleteCard();
-    this._getLike();
-    this._handleClickPhoto();
 
+    this._likeButton = this._element.querySelector('.elements__like');
+    
+    this._setEventListeners()
 
     return this._element;
   }
 
-  // методы класса, которые установят слушателей событий
-  // 1. метод клика по карточке для дальнейшего использования в открытии попапа
-  _handleClickPhoto() {
-    const elementsPhoto = this._element.querySelector('.elements__photo');
-    elementsPhoto.addEventListener ('click', () => {
-      this._handleClickCard(this._name, this._link);
-    });
-  }
-
-  // 1. метод удаление карточки
+  // Метод удаление карточки
   _deleteCard() {
-    this._element.querySelector('.elements__delete').addEventListener('click', () => {
+   
       this._element.remove()
-    });
+    
   }
 
-  // 2. метод постановки лайка
+  // Метод постановки лайка
   _getLike() {
-    this._element.querySelector('.elements__like').addEventListener('click', function (evt) {
-      evt.target.classList.toggle('elements__like_active');
-    });
+    
+      this._likeButton.classList.toggle('elements__like_active');
+    
   }
 
-  /*
+  
   //4. общий слушатель событий на все возможные методы, применимые к карточке
   _setEventListeners() {
 
@@ -69,15 +60,15 @@ export class Card {
     });
 
     // 4.2 слушатель на простановку лайка карточки
-    /* this._element.querySelector('.elements__like').addEventListener('click', () => {
+    this._likeButton.addEventListener('click', () => {
       this._getLike();
     });
 
     // 4.3 слушатель на заполнение полей новой карточки стр.109 из index.js
-    this._element.cardElement.querySelector('.elements__photo').addEventListener('click', () => {
-      this._createNewCard();
+    
+    this._element.querySelector('.elements__photo').addEventListener ('click', () => {
+      this._handleClickCard(this._name, this._link);
     });
-  }*/
-
+  }
 
 }

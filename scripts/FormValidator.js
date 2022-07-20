@@ -6,7 +6,7 @@ export class FormValidator {
     this._buttonElement = this._formElement.querySelector(this._config.submitButtonSelector);
 
   }
-  
+
   // Метод добавления класса с ошибкой
   _showInputError(inputElement, errorMessage) {
     const errorElement = this._formElement.querySelector(`.${inputElement.id}-error`);
@@ -37,12 +37,12 @@ export class FormValidator {
     // проходим по этому массиву методом some
     return this._inputList.some((inputElement) => {
       return !inputElement.validity.valid;
-      
+
     });
   }
 
   // Метод не активной кнопки
-  disabledButton () {
+  disabledButton() {
     this._buttonElement.setAttribute('disabled', true);
     this._buttonElement.classList.add(this._config.inactiveButtonClass);
   }
@@ -54,7 +54,7 @@ export class FormValidator {
   }
 
   //Функция принимает массив полей ввода и элемент кнопки, состояние которой нужно менять
-  _toggleButtonState  () {
+  _toggleButtonState() {
     if (this._hasInvalidInput()) {
       this.disabledButton();
     } else {
@@ -63,32 +63,32 @@ export class FormValidator {
   }
 
 
-/// Вызовем функцию isValid на каждый ввод символа
-// formInput.addEventListener('input', isValid);
-// Взамен ей напишем слушатель на каждое поле ввода
+  /// Вызовем функцию isValid на каждый ввод символа
+  // formInput.addEventListener('input', isValid);
+  // Взамен ей напишем слушатель на каждое поле ввода
 
-_setEventListeners() {
- 
-  this._toggleButtonState();
+  _setEventListeners() {
 
-  // Обойдём все элементы полученной коллекции
+    this._toggleButtonState();
 
-  this._inputList.forEach((inputElement) => {
-    inputElement.addEventListener('input', () => {
-      this._isValid(inputElement);
-      this._toggleButtonState();
+    // Обойдём все элементы полученной коллекции
+
+    this._inputList.forEach((inputElement) => {
+      inputElement.addEventListener('input', () => {
+        this._isValid(inputElement);
+        this._toggleButtonState();
+      });
     });
-  });
 
-};
+  };
 
 
-// Для каждой формы вызовем функцию setEventListeners, передав ей элемент формы
-enableValidation () { 
-   this._setEventListeners();
-};
+  // Для каждой формы вызовем функцию setEventListeners, передав ей элемент формы
+  enableValidation() {
+    this._setEventListeners();
+  };
 
-  // Функция переключения кнопки в попапе при его открытии и очищение списка ошибок.
+  // Метод переключения кнопки в попапе при его открытии и очищение списка ошибок.
   resetValidation() {
     this._toggleButtonState();
 
