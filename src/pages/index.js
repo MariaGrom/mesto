@@ -12,25 +12,16 @@ import PopupWithForm from '../scripts/PopupWithForm.js';
 const buttonOpenPopupProfile = document.querySelector('.profile__edit-button');
 const formEditProfile = document.querySelector('.popup__content');
 const nameInput = formEditProfile.querySelector('.popup__text_type_name');
-const jobInput = formEditProfile.querySelector('.popup__text_type_description');
-const newName = document.querySelector('.profile__title');
-const newJob = document.querySelector('.profile__subtitle');
-const popupProfile = document.querySelector('.popup_edit-profile');
-const popupCloseButton = popupProfile.querySelector('.popup__close-button');
+const jobInput = formEditProfile.querySelector('.popup__text_type_job');
 const formAddProfile = document.querySelector('.popup__form_profile');
 // Переменные для нового места и фото
 const buttonAddOpen = document.querySelector('.profile__add-button');
-const popupPlaceOne = document.querySelector('.popup_place');
-//const popupPlaceCloseButton = popupPlace.querySelector('.popup__close-button');
-const popupPhoto = document.querySelector('.popup_photo');
-const buttonClosePhoto = popupPhoto.querySelector('.popup__close-button');
+const popupPlaceForm = document.querySelector('.popup_place');
 //Переменные для добавление карточек (заполнения формы карточки)
 const list = document.querySelector('.elements__items');
 const formAddCard = document.querySelector('.popup__form_place');
-const formInputName = popupPlaceOne.querySelector('.popup__text_type_name');
-const formInputLink = popupPlaceOne.querySelector('.popup__text_type_link');
-//const popupPhotoTitle = document.querySelector('.popup__caption');
-const popupPhotoImg = document.querySelector('.popup__photo');
+const formInputName = popupPlaceForm.querySelector('.popup__text_type_name');
+const formInputLink = popupPlaceForm.querySelector('.popup__text_type_link');
 
 // Объект с селекторами-ключами : имя пользователя и информация о пользователе
 
@@ -79,7 +70,6 @@ const cardList = new Section({
 // Отрисовываем карточки из массива
 cardList.renderItems();
 
-
 // ======== ФУНКЦИОНАЛ ОТКРЫТИЯ ПОПАПА С БОЛЬШОЙ КАРТИНКОЙ ПРИ КЛИКЕ НА КАРТОЧКУ=======//
 
 // создание попапа из класса PWI
@@ -98,7 +88,6 @@ function handleCardClick(name, link) {
 
 // создаем новый элемент класса UserInfo
 const newUser = new UserInfo(profileUser);
-
 
 // Слушатель действий. Попап открыть, значения в поле формы = исходному имени и работе
 buttonOpenPopupProfile.addEventListener('click', () => {
@@ -127,76 +116,40 @@ function handleProfile() {
   jobInput.value = userData.job;
 };
 
-
-// Заполнение формы попапа Профиля новыми данными, вводимыми пользователем ===> РАЗОБРАТЬСЯ!!!
-
- //Код по новой теории
+// Заполнение формы попапа Профиля новыми данными, вводимыми пользователем
+// Код по новой теории
 const formSubmitProfile = (formData) => {
-console.log ('Данные из формы', formData);
-// вызов у нового пользователя метода подстановки значений данных из формированных полей формы в formData
+  // Вызов у нового пользователя метода подстановки значений данных из формированных полей формы в formData
   newUser.setUserInfo(formData);
-
-  console.log('что у нас в newUser ->', newUser)
-  console.log('заполнение профиля из формы жду этот результат ->', newUser.setUserInfo(formData))
 
   // Закрыть попап формы Профиля
   popupEditProfile.close();
-}
+};
 
-/*
-// Старый код на сабмит формы профиля с новыми данными 
-
-function formSubmitProfile() {
-
-
-  newName.textContent = nameInput.value;
-  newJob.textContent = jobInput.value;
-
-  popupEditProfile.close();
-}
-*/
-
-//создание нового элемента Попап-Профиля из класса PWF
+// Создание нового элемента Попап-Профиля из класса PWF
 const popupEditProfile = new PopupWithForm('.popup_edit-profile', formSubmitProfile);
-popupEditProfile.setEventListeners();
 
 //======================= КОНЕЦ ==============================//
 
 
-
 // ============ ФУНКЦИОНАЛ ОТКРЫТИЯ ПОПАПА ДЛЯ ДОБАВЛЕНИЯ НОВОЙ КАРТОЧКИ НА СТРАНИЦУ =======//
-
 
 // Слушатель действий: сбросить форму, открыть попап Места, блокировка кнопки
 buttonAddOpen.addEventListener('click', function () {
   formAddCard.reset();
   popupPlace.open();
   formCard.resetValidation();
-})
-
-// Заполнение формы попапа Карточки новыми данными из формы и сабмит ===> РАЗОБРАТЬСЯ!!!
-
-// Код по новой теории
-/*const formSubmitPlace = (formData) => {
-  const link = formData.link;
-  const name = formData.name;
-
-  cardList.addItem(createCard({name, link}));
-  popupPlace.close();
-}
-*/
-
-//старый код по форме сабмита по карточке:
+});
 
 // Функция - обработчик событий по добавлению новой карточки 
 function formSubmitPlace(evt) {
 
   const cardElement = createCard(formInputName.value, formInputLink.value); //присваиваем новой карточке значения из полей формы
+  
   addCard(cardElement, list);
 
   popupPlace.close();
-}
+};
 
 // Объявление нового элемента класса
 const popupPlace = new PopupWithForm('.popup_place', formSubmitPlace);
-popupPlace.setEventListeners();
