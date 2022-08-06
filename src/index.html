@@ -8,17 +8,17 @@
     <meta name="keywords" content="html, css, javascript">
     <meta name="author" content="Мария Громыко">
     <title>Место</title>
-    <link rel="stylesheet" href="pages/index.css">
+    <!-- <link rel="stylesheet" href="pages/index.css"> -->
 </head>
 
 <body class="page">
     <header class="header">
-        <img class="header__logo" src="images/logo_white.png" alt="Логотип">
+        <img class="header__logo" src="<%=require('./images/logo_white.png')%>" alt="Логотип">
     </header>
     <main>
         <section class="profile">
             <div class="profile__info">
-                <img class="profile__photo" src="images/kusto.jpg" alt="Аватар профиля">
+                <img class="profile__photo" src="<%=require('./images/kusto.jpg')%>" alt="Аватар профиля">
                 <div class="profile__user">
                     <div class="profile__name">
                         <h1 class="profile__title">Жак-Ив Кусто</h1>
@@ -59,7 +59,7 @@
         </div>
 
         <div class="popup popup_place">
-            <form class="popup__content  popup__form popup__form_place" novalidate>
+            <form class="popup__content popup__form popup__form_place" novalidate>
                 <button type="button" class="popup__close-button"></button>
                 <h2 class="popup__title">Новое место</h2>
                 <fieldset class="popup__fields">
@@ -104,7 +104,7 @@
         </li>
     </template>
 
-    <script type = "module" src="./scripts/index.js"></script>
+    <!---<script type = "module" src="./scripts/index.js"></script>-->
 </body>
 
 </html>
