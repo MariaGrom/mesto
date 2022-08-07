@@ -23,7 +23,7 @@ export class FormValidator {
     errorElement.textContent = ''; // Очистим ошибку
   }
 
-  //Метод проверки валидности поля
+  // Метод проверки валидности поля
   _isValid(inputElement) {
     if (!inputElement.validity.valid) {
       this._showInputError(inputElement, inputElement.validationMessage);   // Если поле не проходит валидацию, покажем ошибку

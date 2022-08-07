@@ -1,12 +1,12 @@
 import '../pages/index.css';
-import { FormValidator } from '../scripts/FormValidator.js';
-import { Card } from '../scripts/Card.js';
-import { initialCards } from '../scripts/cards.js';
-import { configSelector } from '../scripts/validate.js';
-import Section from '../scripts/Section.js';
-import PopupWithImage from '../scripts/PopupWithImage.js';
-import UserInfo from '../scripts/UserInfo.js';
-import PopupWithForm from '../scripts/PopupWithForm.js';
+import { FormValidator } from '../components/FormValidator.js';
+import { Card } from '../components/Card.js';
+import { initialCards } from '../utils/constants.js';
+import { configSelector } from '../utils/constants.js';
+import Section from '../components/Section.js';
+import PopupWithImage from '../components/PopupWithImage.js';
+import UserInfo from '../components/UserInfo.js';
+import PopupWithForm from '../components/PopupWithForm.js';
 
 // Переменные для изменения профиля пользователя
 const buttonOpenPopupProfile = document.querySelector('.profile__edit-button');
@@ -17,7 +17,7 @@ const formAddProfile = document.querySelector('.popup__form_profile');
 // Переменные для нового места и фото
 const buttonAddOpen = document.querySelector('.profile__add-button');
 const popupPlaceForm = document.querySelector('.popup_place');
-//Переменные для добавление карточек (заполнения формы карточки)
+// Переменные для добавление карточек (заполнения формы карточки)
 const list = document.querySelector('.elements__items');
 const formAddCard = document.querySelector('.popup__form_place');
 const formInputName = popupPlaceForm.querySelector('.popup__text_type_name');
@@ -31,11 +31,11 @@ const profileUser = {
 }
 
 
-//Валидация формы профиля
+// Валидация формы профиля
 const formProfile = new FormValidator(configSelector, formAddProfile);
 formProfile.enableValidation();
 
-//Валидация формы карточки
+// Валидация формы карточки
 const formCard = new FormValidator(configSelector, formAddCard);
 formCard.enableValidation();
 
@@ -46,10 +46,10 @@ function createCard(name, link) {
   // Объявляем создание новой карточки из Класса
   const card = new Card(name, link, handleCardClick);
 
-  // задаем элемент "карта" и вызываем метод генерация у новой карточки
+  // Задаем элемент "карта" и вызываем метод генерация у новой карточки
   const cardElement = card.generateCard();
 
-  // возвращаем созданую карточку
+  // Возвращаем созданую карточку
   return cardElement;
 };
 
@@ -70,10 +70,11 @@ const cardList = new Section({
 // Отрисовываем карточки из массива
 cardList.renderItems();
 
-// ======== ФУНКЦИОНАЛ ОТКРЫТИЯ ПОПАПА С БОЛЬШОЙ КАРТИНКОЙ ПРИ КЛИКЕ НА КАРТОЧКУ=======//
+// ФУНКЦИОНАЛ ОТКРЫТИЯ ПОПАПА С БОЛЬШОЙ КАРТИНКОЙ ПРИ КЛИКЕ НА КАРТОЧКУ 
 
 // создание попапа из класса PWI
 const popupImage = new PopupWithImage('.popup_photo');
+popupImage.setEventListeners();
 
 // Функция открытия попапа по клику по карточке => PopupWithImage
 function handleCardClick(name, link) {
@@ -81,18 +82,16 @@ function handleCardClick(name, link) {
   popupImage.open(name, link);
 
 };
-// ==================КОНЕЦ==========================//
 
+// ФУНКЦИОНАЛ РАБОТЫ С ПРОФИЛЕМ ПОЛЬЗОВАТЕЛЯ
 
-// ================ ФУНКЦИОНАЛ РАБОТЫ С ПРОФИЛЕМ ПОЛЬЗОВАТЕЛЯ ====================//
-
-// создаем новый элемент класса UserInfo
+// Создаем новый элемент класса UserInfo
 const newUser = new UserInfo(profileUser);
 
 // Слушатель действий. Попап открыть, значения в поле формы = исходному имени и работе
 buttonOpenPopupProfile.addEventListener('click', () => {
 
-  //Открытие попапа Профиля
+  // Открытие попапа Профиля
   popupEditProfile.open();
 
   // Активация кнопки Сабмита
@@ -106,19 +105,19 @@ buttonOpenPopupProfile.addEventListener('click', () => {
 // Первичные значения в профиле формы
 function handleProfile() {
 
-  //Вызов у нового элемента класса UserInfo  метода возврата объекта с данными пользователя
+  // Вызов у нового элемента класса UserInfo  метода возврата объекта с данными пользователя
   const userData = newUser.getUserInfo();
 
-  // подставляем имя
+  // Подставляем имя
   nameInput.value = userData.name;
 
-  // подставляем работу (информацию о пользователя)
+  // Подставляем работу (информацию о пользователя)
   jobInput.value = userData.job;
 };
 
 // Заполнение формы попапа Профиля новыми данными, вводимыми пользователем
 // Код по новой теории
-const formSubmitProfile = (formData) => {
+const handleProfileFormSubmit = (formData) => {
   // Вызов у нового пользователя метода подстановки значений данных из формированных полей формы в formData
   newUser.setUserInfo(formData);
 
@@ -127,12 +126,10 @@ const formSubmitProfile = (formData) => {
 };
 
 // Создание нового элемента Попап-Профиля из класса PWF
-const popupEditProfile = new PopupWithForm('.popup_edit-profile', formSubmitProfile);
+const popupEditProfile = new PopupWithForm('.popup_edit-profile', handleProfileFormSubmit);
+popupEditProfile.setEventListeners();
 
-//======================= КОНЕЦ ==============================//
-
-
-// ============ ФУНКЦИОНАЛ ОТКРЫТИЯ ПОПАПА ДЛЯ ДОБАВЛЕНИЯ НОВОЙ КАРТОЧКИ НА СТРАНИЦУ =======//
+// ФУНКЦИОНАЛ ОТКРЫТИЯ ПОПАПА ДЛЯ ДОБАВЛЕНИЯ НОВОЙ КАРТОЧКИ НА СТРАНИЦУ
 
 // Слушатель действий: сбросить форму, открыть попап Места, блокировка кнопки
 buttonAddOpen.addEventListener('click', function () {
@@ -142,14 +139,15 @@ buttonAddOpen.addEventListener('click', function () {
 });
 
 // Функция - обработчик событий по добавлению новой карточки 
-function formSubmitPlace(evt) {
+function handleAddCardFormSubmit(evt) {
 
   const cardElement = createCard(formInputName.value, formInputLink.value); //присваиваем новой карточке значения из полей формы
   
-  addCard(cardElement, list);
+  addCard(cardElement);
 
   popupPlace.close();
 };
 
 // Объявление нового элемента класса
-const popupPlace = new PopupWithForm('.popup_place', formSubmitPlace);
+const popupPlace = new PopupWithForm('.popup_place', handleAddCardFormSubmit);
+popupPlace.setEventListeners();

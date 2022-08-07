@@ -1,7 +1,10 @@
+import { Template } from "webpack";
+
 export class Card {
   constructor(name, link, handleCardClick) {
     this._name = name;
     this._link = link;
+    this._template = template;
     this._element = this._getTemplate();
     this._handleCardClick = handleCardClick;
     
