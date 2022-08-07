@@ -1,22 +1,17 @@
-import { Template } from "webpack";
-
 export class Card {
-  constructor(name, link, handleCardClick) {
+  constructor(name, link, template, handleCardClick) {
     this._name = name;
     this._link = link;
     this._template = template;
     this._element = this._getTemplate();
     this._handleCardClick = handleCardClick;
-    
+
   }
 
   _getTemplate() {
-    const cardElement = document
-      .querySelector('.item__template')
-      .content
+    const cardElement = this._template
       .querySelector('.elements__item')
       .cloneNode(true);
-
     return cardElement;
   }
 
@@ -44,17 +39,17 @@ export class Card {
 
   // Метод удаление карточки
   _deleteCard() {
-   
-      this._element.remove();
-      this._element = null;
-    
+
+    this._element.remove();
+    this._element = null;
+
   }
 
   // Метод постановки лайка
   _getLike() {
-    
-      this._likeButton.classList.toggle('elements__like_active');
-    
+
+    this._likeButton.classList.toggle('elements__like_active');
+
   }
 
   //4. общий слушатель событий на все возможные методы, применимые к карточке
@@ -71,9 +66,9 @@ export class Card {
     });
 
     // 4.3 слушатель клика по фото (для открытия попапа с фото) 
-    this._element.querySelector('.elements__photo').addEventListener ('click', () => {
+    this._element.querySelector('.elements__photo').addEventListener('click', () => {
       this._handleCardClick(this._name, this._link)
-    });   
+    });
   }
 
 }

@@ -13,6 +13,6 @@ export default class Section {
 
   //Метод добавления элемента - принимает сформированную карточку и добавлает ее в контейнер
   addItem(cardElement) {
-    this._container.append(cardElement);
+    this._container.prepend(cardElement);
   }
 }

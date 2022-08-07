@@ -1,4 +1,4 @@
-.elements__items{
+.elements__items {
   display: grid;
   grid-template-columns: repeat(auto-fit, 280px);
   grid-template-rows: repeat(auto-fit, 361px);

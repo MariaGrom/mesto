@@ -22,6 +22,7 @@ const list = document.querySelector('.elements__items');
 const formAddCard = document.querySelector('.popup__form_place');
 const formInputName = popupPlaceForm.querySelector('.popup__text_type_name');
 const formInputLink = popupPlaceForm.querySelector('.popup__text_type_link');
+const templatePhoto = document.querySelector('.item__template').content;
 
 // Объект с селекторами-ключами : имя пользователя и информация о пользователе
 
@@ -44,7 +45,7 @@ formCard.enableValidation();
 function createCard(name, link) {
 
   // Объявляем создание новой карточки из Класса
-  const card = new Card(name, link, handleCardClick);
+  const card = new Card(name, link, templatePhoto, handleCardClick);
 
   // Задаем элемент "карта" и вызываем метод генерация у новой карточки
   const cardElement = card.generateCard();
@@ -52,11 +53,6 @@ function createCard(name, link) {
   // Возвращаем созданую карточку
   return cardElement;
 };
-
-// Функция добавления новой карточки на страницу
-function addCard(cardElement) {
-  list.prepend(cardElement);
-}
 
 // Загружаем карточки на страницу из массива исходных данных через создание новой секции из класса Секция
 const cardList = new Section({
@@ -67,12 +63,19 @@ const cardList = new Section({
 }, '.elements__items');
 
 
+// Функция добавления новой карточки на страницу
+function addCard(cardElement) {
+
+  cardList.addItem(cardElement);
+
+}
+
 // Отрисовываем карточки из массива
 cardList.renderItems();
 
 // ФУНКЦИОНАЛ ОТКРЫТИЯ ПОПАПА С БОЛЬШОЙ КАРТИНКОЙ ПРИ КЛИКЕ НА КАРТОЧКУ 
 
-// создание попапа из класса PWI
+// Создание попапа из класса PWI
 const popupImage = new PopupWithImage('.popup_photo');
 popupImage.setEventListeners();
 
@@ -97,8 +100,12 @@ buttonOpenPopupProfile.addEventListener('click', () => {
   // Активация кнопки Сабмита
   formProfile.enableButton();
 
+  // Вызов метода очищения поля ошибок
+  formProfile.resetErrors();
+
   // Присвоение первичных значений (со страницы) в поля открытой формы
   handleProfile();
+
 
 });
 
@@ -133,20 +140,30 @@ popupEditProfile.setEventListeners();
 
 // Слушатель действий: сбросить форму, открыть попап Места, блокировка кнопки
 buttonAddOpen.addEventListener('click', function () {
+
+  // Сброс полей формы Попапа добавления карточек
   formAddCard.reset();
+
+  // Открытие Попапа добавления карточки
   popupPlace.open();
+
+  // Вызов метода переключения кнопки
   formCard.resetValidation();
+
+  // Вызов метода очищения поля ошибок
+  formCard.resetErrors();
 });
 
 // Функция - обработчик событий по добавлению новой карточки 
 function handleAddCardFormSubmit(evt) {
 
   const cardElement = createCard(formInputName.value, formInputLink.value); //присваиваем новой карточке значения из полей формы
-  
+
   addCard(cardElement);
 
   popupPlace.close();
 };
+
 
 // Объявление нового элемента класса
 const popupPlace = new PopupWithForm('.popup_place', handleAddCardFormSubmit);

@@ -88,10 +88,17 @@ export class FormValidator {
     this._setEventListeners();
   };
 
-  // Метод переключения кнопки в попапе при его открытии и очищение списка ошибок.
+  // Метод переключения кнопки 
   resetValidation() {
     this._toggleButtonState();
 
+  }
+
+  // Метод очищения списка ошибок 
+  resetErrors() {
+    this._inputList.forEach((inputElement) => {
+      this._hideInputError(inputElement)
+    })
   }
 
 }
