@@ -1,17 +1,17 @@
 .page {
-  background-color: #000;
   width: 100%;
+  background-color: #000;
   min-width: 320px;
   max-width: 1280px;
-  margin: 0 auto 0;
   padding: 0;
+  margin: 0 auto;
   color: #fff;
-  font-family: "Inter", sans-serif;
-  font-style: normal;
+  font-family: 'Inter', sans-serif;
   -moz-osx-font-smoothing: grayscale;
+  font-style: normal;
   -webkit-font-smoothing: antialiased;
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
-  -moz-text-size-adjust: 100%;
   text-rendering: optimizeLegibility;
+  -moz-text-size-adjust: 100%;
 }

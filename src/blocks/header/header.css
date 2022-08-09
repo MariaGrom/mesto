@@ -2,12 +2,12 @@
   display: flex;
   max-width: calc(100% - 2 * 200px);
   height: 74px;
-  margin: 0 auto 0;
-  padding: 45px 0 0;
   align-items: flex-start;
+  padding: 45px 0 0;
   border-bottom-width: 1px;
+  margin: 0 auto;
   border-bottom-style: solid;
-  border-bottom-color: rgba(84, 84, 84, 0.7);
+  border-bottom-color: rgba(84, 84, 84, 70%);
 }
 
 @media screen and (max-width: 1024px) {

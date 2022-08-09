@@ -16,13 +16,8 @@ const jobInput = formEditProfile.querySelector('.popup__text_type_job');
 const formAddProfile = document.querySelector('.popup__form_profile');
 // Переменные для нового места и фото
 const buttonAddOpen = document.querySelector('.profile__add-button');
-const popupPlaceForm = document.querySelector('.popup_place');
-// Переменные для добавление карточек (заполнения формы карточки)
-const list = document.querySelector('.elements__items');
 const formAddCard = document.querySelector('.popup__form_place');
-const formInputName = popupPlaceForm.querySelector('.popup__text_type_name');
-const formInputLink = popupPlaceForm.querySelector('.popup__text_type_link');
-const templatePhoto = document.querySelector('.item__template').content;
+
 
 // Объект с селекторами-ключами : имя пользователя и информация о пользователе
 
@@ -45,7 +40,7 @@ formCard.enableValidation();
 function createCard(name, link) {
 
   // Объявляем создание новой карточки из Класса
-  const card = new Card(name, link, templatePhoto, handleCardClick);
+  const card = new Card(name, link, '.item__template', handleCardClick);
 
   // Задаем элемент "карта" и вызываем метод генерация у новой карточки
   const cardElement = card.generateCard();
@@ -155,9 +150,9 @@ buttonAddOpen.addEventListener('click', function () {
 });
 
 // Функция - обработчик событий по добавлению новой карточки 
-function handleAddCardFormSubmit(evt) {
+function handleAddCardFormSubmit(data) {
 
-  const cardElement = createCard(formInputName.value, formInputLink.value); //присваиваем новой карточке значения из полей формы
+  const cardElement = createCard(data.name, data.link); //присваиваем новой карточке значения из полей формы
 
   addCard(cardElement);
 

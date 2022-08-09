@@ -1,8 +1,8 @@
 .footer {
   max-width: calc(100% - 2 * 200px);
   height: 18px;
-  margin: 0 auto 0;
   padding: 67px 0 60px;
+  margin: 0 auto;
 }
 
 @media screen and (max-width: 1024px) {
