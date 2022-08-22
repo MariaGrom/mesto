@@ -18,7 +18,9 @@
     <main>
         <section class="profile">
             <div class="profile__info">
-                <img class="profile__photo" src="<%=require('./images/kusto.jpg')%>" alt="Аватар профиля">
+                <div class="profile__photo">
+                    <img class="profile__avatar" src="<%=require('./images/kusto.jpg')%>" alt="Аватар">
+                </div>
                 <div class="profile__user">
                     <div class="profile__name">
                         <h1 class="profile__title">Жак-Ив Кусто</h1>
@@ -54,7 +56,7 @@
                     </label>
                 </fieldset>
                 <button type="submit" class="popup__submit-button popup__button">Сохранить</button>
-                
+
             </form>
         </div>
 
@@ -87,6 +89,33 @@
             </div>
         </div>
 
+        <div class="popup popup_delete-card">
+            <div class="popup__content popup__content-delete">
+                <button type="button" class="popup__close-button"></button>
+                <h2 class="popup__title">Вы уверены?</h2>
+                <button class="popup__submit-button popup__button">Да</button>
+            </div>
+        </div>
+
+        <div class="popup popup_avatar">
+            <form class="popup__content popup__content-avatar popup__form_avatar" novalidate>
+                <button type="button" class="popup__close-button"></button>
+                <h2 class="popup__title">Обновить аватар</h2>
+                <fieldset class="popup__fields">
+                    <label class="link">
+                        <input type="url" name="link" id="link__input" placeholder="Ссылка на картинку"
+                            class="popup__text popup__text_type_link popup__input" required>
+                        <span class="popup__input-error link__input-error"></span>
+                    </label>
+                </fieldset>
+                <button class="popup__submit-button popup__button">Сохранить</button>
+            </form>
+
+        </div>
+
+
+
+
     </main>
     <footer class="footer">
         <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
@@ -98,13 +127,16 @@
             <img class="elements__photo">
             <div class="elements__description">
                 <h2 class="elements__title"></h2>
-                <button class="elements__like"></button>
+                <div class="elements__like-container">
+                    <button class="elements__like"></button>
+                    <h3 class="elements__like_counter">0</h3>
+                </div>
             </div>
             <button class="elements__delete"></button>
         </li>
     </template>
 
-   
+
 </body>
 
 </html>

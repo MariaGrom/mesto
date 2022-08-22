@@ -2,7 +2,9 @@
   "scripts": {
     "build": "webpack --mode production",
     "dev": "webpack serve",
-    "lint": "stylelint \"**/*.css\" ; eslint ."
+    "lint": "stylelint \"**/*.css\" ; eslint .",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "devDependencies": {
     "@babel/core": "^7.18.9",
@@ -15,6 +17,7 @@
     "eslint": "^8.19.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.26.0",
+    "gh-pages": "^4.0.0",
     "html-webpack-plugin": "^5.5.0",
     "mini-css-extract-plugin": "^2.6.1",
     "postcss-loader": "^7.0.1",

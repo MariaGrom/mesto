@@ -1,3 +1,4 @@
+/*
 export const initialCards = [
   {
     name: 'Архыз',
@@ -24,7 +25,7 @@ export const initialCards = [
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg',
   },
 ];
-
+*/
 
 export const configSelector = {
   formSelector: '.popup__form',
@@ -34,3 +35,11 @@ export const configSelector = {
   inputErrorClass: 'popup__input_type_error',
   errorClass: 'popup__error_visible',
 };
+
+export const configApi = {
+  url: "https://mesto.nomoreparties.co/v1/cohort-48",
+  headers: {
+    "content-type": "application/json",
+    "authorization": "6759dab4-c3f2-490f-91ba-dce1213f320e",
+  }
+}
