@@ -8,13 +8,13 @@ export default class Api {
   // 1. Загрузка информации о пользователе с сервера
   getUserInfo() {
     return fetch(`${this._url}/users/me`, { headers: this._headers })
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      } else {
-        console.log ('Ошибка из АПИ!')
-      }
-    })
+      .then(res => {
+        if (res.ok) {
+          return res.json();
+        } else {
+          console.log('Ошибка из АПИ!')
+        }
+      })
   }
 
 
@@ -25,43 +25,66 @@ export default class Api {
         if (res.ok) {
           return res.json();
         } else {
-          console.log ('Ошибка из АПИ!')
+          console.log('Ошибка из АПИ!')
         }
       })
   }
 
   // 3. Редактирование профиля
-  updateUserInfo({name, about}) {
+  updateUserInfo({ name, about }) {
     return fetch(`${this._url}/users/me`,
       {
         method: 'PATCH',
         headers: this._headers,
         body: JSON.stringify({ name, about })
       })
-      .then (res => {
+      .then(res => {
         if (res.ok) {
           return res.json();
         } else {
-          console.log ('Ошибка обновления данных профиля из АПИ!')
+          console.log('Ошибка из АПИ!')
         }
       })
   }
 
   // 4. Добавление новой карточки 
-  createNewCard({ name, link }){
+  createNewCard({ name, link }) {
     return fetch(`${this._url}/cards`,
-    {
-      method: 'POST',
-      headers: this._headers,
-      body: JSON.stringify({ name, link })
-    })
-    .then (res => {
-      if (res.ok) {
-        return res.json();
-      } else {
-        console.log ('Ошибка добавления карточки из АПИ!')
-      }
-    })
+      {
+        method: 'POST',
+        headers: this._headers,
+        body: JSON.stringify({ name, link })
+      })
+      .then(res => {
+        if (res.ok) {
+          return res.json();
+        } else {
+          console.log('Ошибка из АПИ!')
+        }
+      });
+  }
+
+
+  
+
+  // 9. Обновление аватара
+  updateUseravatar({ avatar }) {
+    return fetch(`${this._url}/users/me/avatar`,
+      {
+        method: 'PATCH',
+        headers: this._headers,
+        body: JSON.stringify({ avatar })
+      })
+      .then(res => {
+        if (res.ok) {
+          return res.json();
+        } else {
+          console.log('Ошибка из АПИ!')
+        }
+      })
+
+
+
   }
 
 

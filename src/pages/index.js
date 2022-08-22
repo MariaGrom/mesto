@@ -35,7 +35,7 @@ fetch('https://mesto.nomoreparties.co/v1/cohort-48/cards', {
   api.getUserInfo().then((result)=> {
     console.log(result)
   })
-  .catch (err => console.log(err))
+  .catch (err => console.log('Ошибка:', err))
 
 // Переменные для изменения профиля пользователя
 const buttonOpenPopupProfile = document.querySelector('.profile__edit-button');
@@ -160,16 +160,14 @@ function handleProfileFormSubmit ({ name, job }) {
   // Вызов у нового пользователя метода подстановки значений данных из формированных полей формы в formData
   api.updateUserInfo({ name: name, about: job })
   .then((result) => {
-    //newUser.getUserInfo(result)
-  newUser.setUserInfo(result);
+  newUser.setUserInfo({ name: result.name, job: result.about });
   // Закрыть попап формы Профиля
   popupEditProfile.close();
   })
-  .then((res)=> {
-    console.log('обновленные данные', res)
-  })
-  .catch (err => console.log('Фаталили', err))
+  .catch (err => console.log('Ошибка:', err))
 };
+
+
 
 // Создание нового элемента Попап-Профиля из класса PWF
 const popupEditProfile = new PopupWithForm('.popup_edit-profile', handleProfileFormSubmit);
@@ -196,11 +194,19 @@ buttonAddOpen.addEventListener('click', function () {
 // Функция - обработчик событий по добавлению новой карточки 
 function handleAddCardFormSubmit(data) {
 
-  const cardElement = createCard(data.name, data.link); //присваиваем новой карточке значения из полей формы
 
-  addCard(cardElement);
+  api.createNewCard({name: data.name, link: data.link})
+  .then((result)=> {
+    cardList.addItem(createCard(result.name, result.link)); //присваиваем новой карточке значения из полей формы
 
-  popupPlace.close();
+    //addCard(cardElement);
+  
+    popupPlace.close();
+  })
+  .then((result) => {
+  console.log ('Новая карточка', result)})
+  .catch(err => console.log('Ошибка', err))
+
 };
 
 
@@ -210,16 +216,19 @@ popupPlace.setEventListeners();
 
 
 
-
+/*
 // ФУНКЦИОНАЛ РАБОТЫ С ПОПАПОМ ОБНОВЛЕНИЯ АВАТАРА
 
-/*
+
 // Функция по обновлению аваатар
-const handleAddAvatarFormSubmit = (formData) => {
+function handleAddAvatarFormSubmit ({avatar}) {
 
-  newUser.getUserAvatar(formData)
-
-  popupAvatar.close();
+  api.updateUseravatar({avatar: avatar})
+  .then((result) => {
+    newUser.setUserAvatar({avatar: result.avatar})
+    popupAvatar.close();
+  })
+.catch(err => console.log('Ошибка', err))
 }
 
 // Объявления нового класса попапа - попап аватара
