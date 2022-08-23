@@ -25,17 +25,18 @@ fetch('https://mesto.nomoreparties.co/v1/cohort-48/cards', {
   }); 
 */
 
-  api.getAllCards()
+api.getAllCards()
   .then((items) => {
     cardList.renderItems(items);
-    //console.log('items', items)
   })
   .catch(err => console.log('Ошибка:', err))
 
-  api.getUserInfo().then((result)=> {
-    console.log(result)
-  })
-  .catch (err => console.log('Ошибка:', err))
+// Загрузка данных пользователя с сервера 
+api.getUserInfo()
+.then((result) => {
+console.log(result)
+})
+  .catch(err => console.log('Ошибка:', err))
 
 // Переменные для изменения профиля пользователя
 const buttonOpenPopupProfile = document.querySelector('.profile__edit-button');
@@ -47,7 +48,7 @@ const formAddProfile = document.querySelector('.popup__form_profile');
 const buttonAddOpen = document.querySelector('.profile__add-button');
 const formAddCard = document.querySelector('.popup__form_place');
 // Переменные для изменения аватара
-const buttonChangeAvatar = document.querySelector('.profile__photo');
+const avatar = document.querySelector('.profile__photo');
 const formAddAvatar = document.querySelector('.popup__form_avatar');
 
 // Переменные для удаления карточки
@@ -138,7 +139,6 @@ buttonOpenPopupProfile.addEventListener('click', () => {
   // Присвоение первичных значений (со страницы) в поля открытой формы
   handleProfile();
 
-
 });
 
 // Первичные значения в профиле формы
@@ -152,20 +152,34 @@ function handleProfile() {
 
   // Подставляем работу (информацию о пользователя)
   jobInput.value = userData.job;
+
+
 };
 
 // Заполнение формы попапа Профиля новыми данными, вводимыми пользователем
 // Код по новой теории
-function handleProfileFormSubmit ({ name, job }) {
+function handleProfileFormSubmit({ name, job }) {
   // Вызов у нового пользователя метода подстановки значений данных из формированных полей формы в formData
   api.updateUserInfo({ name: name, about: job })
-  .then((result) => {
-  newUser.setUserInfo({ name: result.name, job: result.about });
-  // Закрыть попап формы Профиля
-  popupEditProfile.close();
-  })
-  .catch (err => console.log('Ошибка:', err))
+    .then((data) => {
+      newUser.setUserInfo({
+        name: data.name,
+        job: data.about
+      })
+      // Закрыть попап формы Профиля
+      popupEditProfile.close();
+    })
+    .catch(err => console.log('Ошибка:', err))
 };
+
+
+// Загрузка данных пользователя с сервера 
+api.getUserInfo().then(data => newUser.setUserInfo({
+  name: data.name,
+  job: data.about
+}))
+  .catch(err => console.log('Ошибка:', err))
+
 
 
 
@@ -195,17 +209,18 @@ buttonAddOpen.addEventListener('click', function () {
 function handleAddCardFormSubmit(data) {
 
 
-  api.createNewCard({name: data.name, link: data.link})
-  .then((result)=> {
-    cardList.addItem(createCard(result.name, result.link)); //присваиваем новой карточке значения из полей формы
+  api.createNewCard({ name: data.name, link: data.link })
+    .then((result) => {
+      cardList.addItem(createCard(result.name, result.link)); //присваиваем новой карточке значения из полей формы
 
-    //addCard(cardElement);
-  
-    popupPlace.close();
-  })
-  .then((result) => {
-  console.log ('Новая карточка', result)})
-  .catch(err => console.log('Ошибка', err))
+      //addCard(cardElement);
+
+      popupPlace.close();
+    })
+    .then((result) => {
+      console.log('Новая карточка', result)
+    })
+    .catch(err => console.log('Ошибка', err))
 
 };
 
@@ -216,31 +231,40 @@ popupPlace.setEventListeners();
 
 
 
-/*
+
 // ФУНКЦИОНАЛ РАБОТЫ С ПОПАПОМ ОБНОВЛЕНИЯ АВАТАРА
 
 
 // Функция по обновлению аваатар
-function handleAddAvatarFormSubmit ({avatar}) {
+function handleAddAvatarFormSubmit({ avatar }) {
 
-  api.updateUseravatar({avatar: avatar})
-  .then((result) => {
-    newUser.setUserAvatar({avatar: result.avatar})
-    popupAvatar.close();
-  })
-.catch(err => console.log('Ошибка', err))
+  api.updateUseravatar({ avatar: avatar })
+    .then((result) => {
+      newUser.setUserAvatar
+        ({
+          avatar: result.avatar
+        })
+      popupAvatar.close();
+    })
+    .catch(err => console.log('Ошибка', err))
 }
+
+api.getUserInfo().then(data => newUser.setUserInfo
+  ({
+    avatar: data.avatar,
+  }))
+  .catch(err => console.log('Ошибка:', err))
 
 // Объявления нового класса попапа - попап аватара
 const popupAvatar = new PopupWithForm('.popup_avatar', handleAddAvatarFormSubmit);
 popupAvatar.setEventListeners();
 
 // Слушатель событий на открытие попапа 
-buttonChangeAvatar.addEventListener('click', function(){
-  console.log ('Клик')
+avatar.addEventListener('click', function () {
+  console.log('Клик')
   popupAvatar.open();
 })
-*/
+
 
 
 /*

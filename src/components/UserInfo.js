@@ -11,21 +11,22 @@ export default class UserInfo {
     const userData = {
 
       name: this._selectorUserName.textContent,
-      job: this._selectorUserJob.textContent
+      job: this._selectorUserJob.textContent,
+      avatar: this._selectorUserAvatar.src
 
     };
 
     return userData;
   }
 
-  getUserAvatar() {
+  /*getUserAvatar() {
 
     const userAvatar = {
       avatar: this._selectorUserAvatar.src
     }
 
     return userAvatar;
-  }
+  }*/
 
   // Метод принимает новые данные пользователя и добавляет их на страницу.
   setUserInfo({ name, job }) {
@@ -34,8 +35,8 @@ export default class UserInfo {
 
   }
 
-  setUserAvatar() {
-    this._selectorUserAvatar.src = src;
+  setUserAvatar({ avatar }) {
+    this._selectorUserAvatar.src = avatar;
   }
 
 }
