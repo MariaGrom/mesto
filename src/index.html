@@ -49,7 +49,7 @@
                         <span class="popup__input-error name__input-error"></span>
                     </label>
                     <label class="job">
-                        <input type="text" name="job" id="job__input" placeholder="О себе"
+                        <input type="text" name="about" id="job__input" placeholder="О себе"
                             class="popup__text popup__text_type_job popup__input" minlength="2" maxlength="200"
                             required>
                         <span class="popup__input-error job__input-error"></span>
@@ -90,22 +90,22 @@
         </div>
 
         <div class="popup popup_delete-card">
-            <div class="popup__content popup__content-delete">
+            <form class="popup__content popup__content-delete">
                 <button type="button" class="popup__close-button"></button>
                 <h2 class="popup__title">Вы уверены?</h2>
                 <button class="popup__submit-button popup__button">Да</button>
-            </div>
+            </form>
         </div>
 
         <div class="popup popup_avatar">
-            <form class="popup__content popup__content-avatar popup__form_avatar" novalidate>
+            <form class="popup__content popup__form popup__content-avatar popup__form_avatar" novalidate>
                 <button type="button" class="popup__close-button"></button>
                 <h2 class="popup__title">Обновить аватар</h2>
                 <fieldset class="popup__fields">
                     <label class="link">
-                        <input type="url" name="link" id="link__input" placeholder="Ссылка на картинку"
-                            class="popup__text popup__text_type_link popup__input" required>
-                        <span class="popup__input-error link__input-error"></span>
+                        <input type="url" name="avatar" id="avatar__input" placeholder="Ссылка на картинку"
+                            class="popup__text popup__text_type_avatar popup__input" required>
+                        <span class="popup__input-error avatar__input-error"></span>
                     </label>
                 </fieldset>
                 <button class="popup__submit-button popup__button">Сохранить</button>
@@ -129,7 +129,7 @@
                 <h2 class="elements__title"></h2>
                 <div class="elements__like-container">
                     <button class="elements__like"></button>
-                    <h3 class="elements__like_counter">0</h3>
+                    <span class="elements__like_counter">0</span>
                 </div>
             </div>
             <button class="elements__delete"></button>

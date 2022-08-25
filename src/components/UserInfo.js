@@ -1,5 +1,6 @@
 export default class UserInfo {
   constructor({ selectorUserName, selectorUserJob, selectorUserAvatar }) {
+    this._data = {};
     this._selectorUserName = document.querySelector(selectorUserName);
     this._selectorUserJob = document.querySelector(selectorUserJob);
     this._selectorUserAvatar = document.querySelector(selectorUserAvatar);
@@ -8,35 +9,21 @@ export default class UserInfo {
 
   // Метод возвращает объект с данными пользователя. Метод позволит подставить данные пользователя в форму при открытии.
   getUserInfo() {
-    const userData = {
 
-      name: this._selectorUserName.textContent,
-      job: this._selectorUserJob.textContent,
-      avatar: this._selectorUserAvatar.src
-
-    };
-
-    return userData;
+    return this._data;
   }
-
-  /*getUserAvatar() {
-
-    const userAvatar = {
-      avatar: this._selectorUserAvatar.src
-    }
-
-    return userAvatar;
-  }*/
 
   // Метод принимает новые данные пользователя и добавляет их на страницу.
-  setUserInfo({ name, job }) {
-    this._selectorUserName.textContent = name;
-    this._selectorUserJob.textContent = job;
+  setUserInfo(data) {
+    this._data = data;
+    this._selectorUserName.textContent = data.name;
+    this._selectorUserJob.textContent = data.about;
 
   }
 
-  setUserAvatar({ avatar }) {
-    this._selectorUserAvatar.src = avatar;
+  setUserAvatar(data) {
+    this._data = data;
+    this._selectorUserAvatar.src = data.avatar;
   }
 
 }

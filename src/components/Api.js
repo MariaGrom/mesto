@@ -5,29 +5,24 @@ export default class Api {
   }
 
 
+  _handleResponce(res){
+    if (res.ok) {
+      return res.json();
+    } 
+    return Promise.reject(res.status);
+  }
+
   // 1. Загрузка информации о пользователе с сервера
   getUserInfo() {
     return fetch(`${this._url}/users/me`, { headers: this._headers })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        } else {
-          console.log('Ошибка из АПИ!')
-        }
-      })
+      .then(this._handleResponce)
   }
 
 
   // 2. Загрузка карточек с сервера
   getAllCards() {
     return fetch(`${this._url}/cards`, { headers: this._headers })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        } else {
-          console.log('Ошибка из АПИ!')
-        }
-      })
+      .then(this._handleResponce)
   }
 
   // 3. Редактирование профиля
@@ -38,13 +33,7 @@ export default class Api {
         headers: this._headers,
         body: JSON.stringify({ name, about })
       })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        } else {
-          console.log('Ошибка из АПИ!')
-        }
-      })
+      .then(this._handleResponce)
   }
 
   // 4. Добавление новой карточки 
@@ -55,19 +44,42 @@ export default class Api {
         headers: this._headers,
         body: JSON.stringify({ name, link })
       })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        } else {
-          console.log('Ошибка из АПИ!')
-        }
-      });
+      .then(this._handleResponce)
   }
 
 
+  // 5. Удаление карточки
+  deleteCard(id){
+    return fetch(`${this._url}/cards/${id}`,
+    {
+      method: 'DELETE',
+      headers: this._headers,
+    })
+    .then(this._handleResponce)
+  }
   
 
-  // 9. Обновление аватара
+  // 6. Постановка лайка
+  setLike(id){
+    return fetch(`${this._url}/cards/${id}/likes`,
+    {
+      method: 'PUT',
+      headers: this._headers,
+    })
+    .then(this._handleResponce)
+  }
+
+// 7. Удаление лайка
+deleteLike(id){
+  return fetch(`${this._url}/cards/${id}/likes`,
+  {
+    method: 'DELETE',
+    headers: this._headers,
+  })
+  .then(this._handleResponce)
+}
+
+  // 8. Обновление аватара
   updateUseravatar({ avatar }) {
     return fetch(`${this._url}/users/me/avatar`,
       {
@@ -82,15 +94,6 @@ export default class Api {
           console.log('Ошибка из АПИ!')
         }
       })
-
-
-
   }
-
-
-
-
-
-
 
 }

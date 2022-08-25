@@ -1,16 +1,14 @@
 export default class Section {
   constructor({ renderer }, containerSelector) {
-    //this._renderItems = items;
     this._renderer = renderer;
     this._container = document.querySelector(containerSelector);
   }
 
-  renderItems(items) {
-    /*this._renderItems.forEach((item) => {
-      this._renderer(item);
-    });*/
+  renderItems(items, id) {
+
     items.forEach(item => {
-      this._renderer(item)
+      const isCardMine = item.owner._id === id 
+      this._renderer(item, isCardMine)
     });
   }
 
