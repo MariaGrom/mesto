@@ -1,5 +1,5 @@
 export class Card {
-  constructor(cardData, templateSelector, handler, isCardMine) {
+  constructor(cardData, templateSelector, handler) {
     this._cardData = cardData;
     this._name = cardData.name;
     this._link = cardData.link;
@@ -20,20 +20,27 @@ export class Card {
 
     this._buttonDeleteCard = this._element.querySelector('.elements__delete');
 
-    this._isCardMine = isCardMine;
 
     this._handleCardRemove = handler.onDelete;
-    this._isOwnerCard();
+    const classNameLiked = 'elements__like_active';
+
+    if (!this._isOwnerCard()) {
+      this._buttonDeleteCard.remove()
+    }
+    
+    if (this.isLike()) {
+      this._likeButton.classList.add(classNameLiked);
+    } else {
+      this._likeButton.classList.remove(classNameLiked);
+    }
 
     this._setEventListeners();
 
   }
 
-  // Методо удаления значка корзины, если карточка не моя
+  // Метод удаления значка корзины, если карточка не моя
   _isOwnerCard() {
-    if (!this._isCardMine) {
-      this._buttonDeleteCard.remove()
-    }
+    return this._cardData.currentUser._id === this._cardData.owner._id
   }
 
   // Метод isLike - определяет принадлежность лайка по id
@@ -73,9 +80,7 @@ export class Card {
 
   //метод возвращающий готовую разметку, с установленными методами и слушателями
   generateCard() {
-    if (this._isCardMine) {
-      this._buttonDeleteCard.classList.add('popup_opened')
-    }
+    
     return this._element;
   }
 

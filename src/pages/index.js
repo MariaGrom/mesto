@@ -19,8 +19,7 @@ Promise.all([api.getUserInfo(), api.getAllCards()])
 .then(([data, items]) => {
   newUser.setUserInfo(data);
   newUser.setUserAvatar(data);
-  const idUser = data._id;
-  cardList.renderItems(items.slice().reverse(), idUser);
+  cardList.renderItems(items.slice().reverse());
 })
 .catch ((err) => {
   console.log (err);
@@ -66,7 +65,7 @@ const formAvatar = new FormValidator(configSelector, formAddAvatar);
 formAvatar.enableValidation();
 
 // Функция создания карточки (как новой из формы, так и из массива)
-function createCard(cardData, isCardMine) {
+function createCard(cardData) {
 
   cardData.currentUser = newUser.getUserInfo();
 
@@ -112,7 +111,7 @@ function createCard(cardData, isCardMine) {
       });
 
     }
-  }, isCardMine);
+  });
 
   // Задаем элемент "карта" и вызываем метод генерация у новой карточки
   const cardElement = card.generateCard();
@@ -131,19 +130,12 @@ popupDeleteCard.setEventListeners();
 
 // Загружаем карточки на страницу из массива исходных данных через создание новой секции из класса Секция
 const cardList = new Section({
-  renderer: (cardData, isCardMine) => {
-    cardList.addItem(createCard(cardData, isCardMine));
+  renderer: (cardData) => {
+    cardList.addItem(createCard(cardData));
   },
 }, '.elements__items');
 
-/*
-// Функция добавления новой карточки на страницу
-function addCard(cardElement) {
 
-  cardList.addItem(cardElement);
-
-}
-*/
 
 // ФУНКЦИОНАЛ ОТКРЫТИЯ ПОПАПА С БОЛЬШОЙ КАРТИНКОЙ ПРИ КЛИКЕ НА КАРТОЧКУ 
 
@@ -240,7 +232,7 @@ function handleAddCardFormSubmit(data) {
 
   api.createNewCard({ name: data.name, link: data.link })
     .then((result) => {
-      cardList.addItem(createCard(result, true)); //присваиваем новой карточке значения из полей формы
+      cardList.addItem(createCard(result)); //присваиваем новой карточке значения из полей формы
 
       popupPlace.close();
     })

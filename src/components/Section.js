@@ -4,11 +4,10 @@ export default class Section {
     this._container = document.querySelector(containerSelector);
   }
 
-  renderItems(items, id) {
+  renderItems(items) {
 
     items.forEach(item => {
-      const isCardMine = item.owner._id === id 
-      this._renderer(item, isCardMine)
+      this._renderer(item)
     });
   }
 
