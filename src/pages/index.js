@@ -269,6 +269,5 @@ popupAvatar.setEventListeners();
 
 // Слушатель событий на открытие попапа 
 avatar.addEventListener('click', function () {
-  console.log('Клик')
   popupAvatar.open();
 })
