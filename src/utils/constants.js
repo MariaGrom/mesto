@@ -13,4 +13,11 @@ export const configApi = {
     "content-type": "application/json",
     "authorization": "6759dab4-c3f2-490f-91ba-dce1213f320e",
   }
-}
+};
+
+// Объект с селекторами-ключами : имя пользователя и информация о пользователе
+export const profileUser = {
+  selectorUserName: '.profile__title',
+  selectorUserJob: '.profile__subtitle',
+  selectorUserAvatar: '.profile__avatar',
+};

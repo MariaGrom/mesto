@@ -87,13 +87,7 @@ deleteLike(id){
         headers: this._headers,
         body: JSON.stringify({ avatar })
       })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        } else {
-          console.log('Ошибка из АПИ!')
-        }
-      })
+      .then(this._handleResponce)
   }
 
 }

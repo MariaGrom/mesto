@@ -1,7 +1,7 @@
 import '../pages/index.css';
 import { FormValidator } from '../components/FormValidator.js';
 import { Card } from '../components/Card.js';
-import { configSelector } from '../utils/constants.js';
+import { configSelector, profileUser } from '../utils/constants.js';
 import { configApi } from '../utils/constants.js';
 import Section from '../components/Section.js';
 import PopupWithImage from '../components/PopupWithImage.js';
@@ -42,14 +42,6 @@ const formAddAvatar = document.querySelector('.popup__form_avatar');
 // Переменные для удаления карточки
 //const buttonDeleteCard = document.querySelector('.elements__delete');
 
-
-// Объект с селекторами-ключами : имя пользователя и информация о пользователе
-
-const profileUser = {
-  selectorUserName: '.profile__title',
-  selectorUserJob: '.profile__subtitle',
-  selectorUserAvatar: '.profile__avatar',
-}
 
 
 // Валидация формы профиля
@@ -270,4 +262,5 @@ popupAvatar.setEventListeners();
 // Слушатель событий на открытие попапа 
 avatar.addEventListener('click', function () {
   popupAvatar.open();
+  formAvatar.resetValidation();
 })
